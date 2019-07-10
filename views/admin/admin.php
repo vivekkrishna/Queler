@@ -814,7 +814,7 @@ if($current_user->can_see_this('pending.read' , $group)) {
 			<div id="dashboard" class="tab-pane fade in <?php if($section == 'dashboard') { echo 'active'; } ?>">
 			<h3 class="page-header"><?php echo $lang['admin-hello']; ?>, <?php echo $current_user->f_name; ?>!</h3>
 				<div class="alert alert-info" stye="direction: ltr; text-align:left">
-					<strong><i class="fa fa-thumbs-up"></i> Rate Pearls! <3 </strong> If you like my work, please support me by <a href="https://codecanyon.net/item/pearls-questions-and-answers-platform/reviews/19305873" target="_blank">Rating Pearls!</a> on CodeCanyon (y)
+					<strong><i class="fa fa-thumbs-up"></i> Rate Queler! <3 </strong> If you like my work, please support me by <a href="https://codecanyon.net/item/pearls-questions-and-answers-platform/reviews/19305873" target="_blank">Rating Pearls!</a> on CodeCanyon (y)
 				</div>
 				
 				

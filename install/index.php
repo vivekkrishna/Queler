@@ -192,11 +192,11 @@ require_once($current ."/url_mapper.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="Description" content="Pearls! Installer">
-	<meta name="author" content="MichaelDesigns">
+    <meta name="Description" content="Queler! Installer">
+	<meta name="author" content="choppak">
     <link rel="icon" href="../favicon.ico">
 
-    <title>Pearls! Installer</title>
+    <title>Queler! Installer</title>
 	
 	<!-- Bootstrap core CSS -->
     <link href="<?php echo $assets_location; ?>public/css/bootstrap.css?v=1.01" rel="stylesheet">
@@ -300,7 +300,7 @@ require_once($current ."/url_mapper.php");
 			}}
 		?>
 		<div class= "page-header">
-			<h3>Welcome to Pearls! installer script<small class="pull-right">[ Step <?php echo $step; ?> of <?php echo $steps; ?> ]</small></h3>
+			<h3>Welcome to Queler! installer script<small class="pull-right">[ Step <?php echo $step; ?> of <?php echo $steps; ?> ]</small></h3>
 		</div>
 		
 		<?php if(!empty($errors)) { ?>
@@ -320,7 +320,7 @@ require_once($current ."/url_mapper.php");
 				case '1' :
 				?>
 				<div style="color:black; font-size:16px">
-				Thanks for purchasing Pearls!<br>Now let's break the ice between pearls and your server ;)
+				Thanks for purchasing Queler!<br>Now let's break the ice between pearls and your server ;)
 				
 			<br><br>
 			<div class="form-group">
@@ -359,7 +359,7 @@ require_once($current ."/url_mapper.php");
 				<input type="text" class="form-control" name="url" id="url" value="<?php echo $url; ?>" required>
 			</div>
 			
-			Pearls! uses some open source tools for security, analytics and sharing functions, please follow these steps to properly install them
+			Queler! uses some open source tools for security, analytics and sharing functions, please follow these steps to properly install them
 				
 			<br><br>
 			<div class="form-group clearfix">
@@ -546,7 +546,7 @@ require_once($current ."/url_mapper.php");
 				case '3' :
 			?>
 			<div style="color:black; font-size:16px">
-				Great! Now tell pearls more about you!<br>
+				Great! Now tell queler more about you!<br>
 				
 			<br><br>
 			<div class="form-group clearfix">
@@ -575,7 +575,7 @@ require_once($current ."/url_mapper.php");
 				case '4' :
 			?>
 			<div style="color:black; font-size:16px">
-				<h3 style="color:green">Congratulations! You've installed (Pearls) !</h3><br>
+				<h3 style="color:green">Congratulations! You've installed (queler) !</h3><br>
 				<h4>You can now <a href="<?php echo WEB_LINK; ?>">view</a> your script and <a href="<?php echo WEB_LINK; ?>/login/">login</a> using credentials you entered minutes ago.</h4>
 				<h4>Don't forget to <b>delete (install) folder!</b></h4>
 				<h4>Feel free to <a href="mailto:michael.zohney@gmail.com">Contact Me</a> anytime at michael.zohney@gmail.com ;)</h4>
