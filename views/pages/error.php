@@ -21,7 +21,7 @@ require_once(VIEW_PATH.'pages/header.php'); ?>
 			<div class="input-group searchbox hidden-sm hidden-xs" style="">
 			  <input type="text" name="title" class="searchbox-field form-control typeahead" placeholder="What's in your mind ?">
 			  <span class="input-group-btn">
-				<button class="btn btn-default" type="submit">Ask!</button>
+				<button class="btn btn-default" type="submit">Challenge!</button>
 			  </span>
 			</div><!-- /input-group -->
 			<?php 

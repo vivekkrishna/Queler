@@ -11,7 +11,7 @@
  *
  * Hybrid_Auth class provide a simple way to authenticate users via OpenID and OAuth.
  *
- * Generally, Hybrid_Auth is the only class you should instanciate and use throughout your application.
+ * Generally, Hybrid_Auth is the only class you should instantiate and use throughout your application.
  */
 class Hybrid_Auth {
 

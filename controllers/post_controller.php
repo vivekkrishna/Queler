@@ -27,7 +27,7 @@
 			exit();
 		}
 		
-		$title = 'Submit New Question';
+		$title = 'Submit New Challenge';
 		require_once(VIEW_PATH . 'post/create.php');
     }
 
@@ -60,7 +60,7 @@
 		
 		}
 		if($q_slug) {
-			$title = 'Read Question';
+			$title = 'Read Challenge';
 			require_once(VIEW_PATH . 'post/read.php');
 		} else {
 			redirect_to($url_mapper['error/404/']); 
@@ -102,7 +102,7 @@
 			$edit_mode = true;
 			
 		if($q_slug) {
-			$title= "Update Question";
+			$title= "Update Challenge";
 			require_once(VIEW_PATH . 'post/update.php');
 		} else {
 			redirect_to($url_mapper['error/404/']); 

@@ -6,8 +6,6 @@ require_once(VIEW_PATH.'pages/header.php');
 $chat = MiscFunction::get_function("chat");
 $general_settings = MiscFunction::get_function("general_settings");
 
-
-
 if (isset($_POST['add_topic'])) {
 		if(!$current_user->can_see_this("admintopics.read",$group)) {
 			$msg = $lang['alert-restricted'];
@@ -813,9 +811,6 @@ if($current_user->can_see_this('pending.read' , $group)) {
 			<?php if($current_user->can_see_this('dashboard.read' , $group)) { ?>
 			<div id="dashboard" class="tab-pane fade in <?php if($section == 'dashboard') { echo 'active'; } ?>">
 			<h3 class="page-header"><?php echo $lang['admin-hello']; ?>, <?php echo $current_user->f_name; ?>!</h3>
-				<div class="alert alert-info" stye="direction: ltr; text-align:left">
-					<strong><i class="fa fa-thumbs-up"></i> Rate Queler! <3 </strong> If you like my work, please support me by <a href="https://codecanyon.net/item/pearls-questions-and-answers-platform/reviews/19305873" target="_blank">Rating Pearls!</a> on CodeCanyon (y)
-				</div>
 				
 				
 			<p style="font-size:16px"><?php $str = $lang['admin-dashboard-users']; $str = str_replace('[COUNT]' , User::count_everything(' AND id != 1000 AND deleted = 0 ') , $str ); echo $str; ?></p>

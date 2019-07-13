@@ -475,12 +475,7 @@ if(isset($_SESSION[$elhash_login]) && $_SESSION[$elhash_login] != "") {
 				</div>
 				
 			</div>
-			
-          <div class="mastfoot ">
-            <div class="inner">
-              <p>&copy; <a href="http://michael-designs.com" style="color:white">Michael Designs</a>.</p>
-            </div>
-          </div>
+
 
         </div>
 
