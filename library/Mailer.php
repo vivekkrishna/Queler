@@ -20,7 +20,7 @@ class Mailer {
 		$mail->CharSet="windows-1256";
 		$mail->Subject = iconv('windows-1256', 'utf-8', $title);
 
-		$mail->FromName = 'Queler! Challenge hosting platform';
+		$mail->FromName = 'Queler! Challenge platform';
 		$mail->From = $from;
 		$mail->AddAddress($to,$to_name);
 

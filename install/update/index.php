@@ -64,11 +64,11 @@ if(isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="Description" content="Queler! Update">
-	<meta name="author" content="choppak">
+    <meta name="Description" content="Pearls! Update">
+	<meta name="author" content="MichaelDesigns">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Queler! Update</title>
+    <title>Pearls! Update</title>
 	
 	<!-- Bootstrap core CSS -->
     <link href="<?php echo $assets_location; ?>public/css/bootstrap.css?v=1.01" rel="stylesheet">
@@ -106,7 +106,7 @@ if(isset($_POST['submit'])) {
           </button>
           
 		  
-		  <a class="navbar-brand" href="#me" style="font-family:Lobster, Tahoma, Arial; color:#b92b27;font-size:25px">Queler! Update</a>
+		  <a class="navbar-brand" href="#me" style="font-family:Lobster, Tahoma, Arial; color:#b92b27;font-size:25px">Pearls! Update</a>
         </div>
 		
 		<div id="navbar" class="navbar-collapse collapse">
@@ -172,7 +172,7 @@ if(isset($_POST['submit'])) {
 			}}
 		?>
 		<div class= "page-header">
-			<h3>Welcome to Queler! Update script<small class="pull-right">[ Step <?php echo $step; ?> of <?php echo $steps; ?> ]</small></h3>
+			<h3>Welcome to Pearls! Update script<small class="pull-right">[ Step <?php echo $step; ?> of <?php echo $steps; ?> ]</small></h3>
 		</div>
 		
 		<?php if(!empty($errors)) { ?>
@@ -199,7 +199,7 @@ if(isset($_POST['submit'])) {
 				case '2' :
 			?>
 			<div style="color:black; font-size:16px">
-				<h3 style="color:green">Congratulations! You've upgraded (Queler) !</h3><br>
+				<h3 style="color:green">Congratulations! You've upgraded (Pearls) !</h3><br>
 				<h4>You can now <a href="<?php echo WEB_LINK; ?>">view</a> your script and <a href="<?php echo WEB_LINK; ?>/login/">login</a> using credentials you entered minutes ago.</h4>
 				<h4>Don't forget to <b>delete (upgrade) folder!</b></h4>
 				<h4>Feel free to <a href="mailto:michael.zohney@gmail.com">Contact Me</a> anytime at michael.zohney@gmail.com ;)</h4>
@@ -232,10 +232,7 @@ if(isset($_POST['submit'])) {
 	</div>
 	
 </div>
-	
-	<br><br><div class="master-footer">
-	<a href="http://michael-designs.com" target="_blank">Michael Designs </a>&copy; 2017
-	</div>	
+
 
 	
     </div> <!-- /container -->
