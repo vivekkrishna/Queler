@@ -51,7 +51,7 @@ CREATE TABLE `[DBTP]functions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='misc functions goes here';
 
 INSERT INTO `[DBTP]functions` (`id`, `function`, `value`, `msg`) VALUES
-(1, 'general_settings', 'a:11:{s:9:"site_name";s:7:"Queler!";s:16:"site_description";s:21:"Post challenges";s:13:"site_keywords";s:23:"Questions,Answers,Quora";s:11:"site_status";s:1:"1";s:9:"site_lang";s:7:"English";s:11:"closure_msg";s:48:"Site closed for maintenance.. please stay tuned!";s:8:"url_type";s:4:"slug";s:10:"q_approval";s:1:"0";s:10:"a_approval";s:1:"0";s:9:"reg_group";s:1:"3";s:13:"public_access";s:1:"1";}', ''),
+(1, 'general_settings', 'a:11:{s:9:"site_name";s:7:"Queler!";s:16:"site_description";s:15:"Post challenges";s:13:"site_keywords";s:25:"Challenges,Answers,Queler";s:11:"site_status";s:1:"1";s:9:"site_lang";s:7:"English";s:11:"closure_msg";s:48:"Site closed for maintenance.. please stay tuned!";s:8:"url_type";s:4:"slug";s:10:"q_approval";s:1:"0";s:10:"a_approval";s:1:"0";s:9:"reg_group";s:1:"3";s:13:"public_access";s:1:"1";}', ''),
 (2, 'privacy-policy', '', ''),
 (3, 'about-us', '', ''),
 (4, 'contact-us', '', ''),
