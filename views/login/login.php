@@ -338,8 +338,10 @@ if(isset($_SESSION[$elhash_login]) && $_SESSION[$elhash_login] != "") {
           </div>
 
 			<div class="inner cover searchsection">
-				<h3 style="color:#b92b27;font-size:45px" class="login-brand"><center><?php echo APPNAME; ?></center></h3>
 				<div class="loginbox">
+                    <h3 style="color:#b92b27;font-size:45px" class="login-brand"><center><?php echo APPNAME; ?></center></h3>
+                    <p style="font-size:8px"><center> A place to host, participate and enjoy competitions </center></p>
+                    </br>
 					<div class="row">
 							<?php
 			if (isset($_GET['edit']) && isset($_GET['msg']) && $_GET['edit'] == "success") :
