@@ -55,6 +55,7 @@ $lang['btn-tools'] = 'Инструменты';
 $lang['btn-close_account'] = 'Удалить аккаунт';
 
 //Главная страница
+$lang['index-search-site'] = "Search Queler";
 $lang['index-search-title'] = "Введите вопрос";
 $lang['index-search-button'] = 'Задать вопрос';
 $lang['index-search-questions'] = 'Вопросы по теме';

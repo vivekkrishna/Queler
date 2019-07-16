@@ -139,7 +139,7 @@
 		  
 		  <form action="<?php echo $url_mapper['questions/create'] ?>" method="post" role="form" enctype="multipart/form-data">
 				<div class="input-group searchbox hidden-sm hidden-xs col-lg-5 col-md-3" style="">
-				  <input type="text" name="title" class="searchbox-field form-control typeahead" placeholder="<?php echo $lang['index-search-title']; ?>" autofocus>
+				  <input type="text" name="title" class="searchbox-field form-control typeahead" placeholder="<?php echo $lang['index-search-site']; ?>" autofocus>
 				  <span class="input-group-btn">
 					<button class="btn btn-default" type="submit"><?php echo $lang['index-search-button']; ?>!</button>
 				  </span>

@@ -21,7 +21,7 @@ class IndexController {
 		if(!isset($settings['site_lang'])) { $settings['site_lang'] = 'English'; }
 		require_once(LIBRARY_PATH ."lang/lang.{$settings['site_lang']}.php");
 		
-		$title = 'Index';
+		$title = 'Home';
 		require_once(VIEW_PATH . 'pages/index.php');
 	}
     

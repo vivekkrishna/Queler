@@ -55,6 +55,7 @@ $lang['btn-tools'] = 'أدوات';
 $lang['btn-close_account'] = 'إغلاق الحساب';
 
 //Index page
+$lang['index-search-site'] = "Search Queler";
 $lang['index-search-title'] = "بماذا تفكر ؟";
 $lang['index-search-button'] = 'إسأل';
 $lang['index-search-questions'] = 'آسئلة حول';

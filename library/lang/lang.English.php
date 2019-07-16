@@ -55,7 +55,8 @@ $lang['btn-tools'] = 'Tools';
 $lang['btn-close_account'] = 'Close Account';
 
 //Index page
-$lang['index-search-title'] = "What's in your mind";
+$lang['index-search-site'] = "Search Queler";
+$lang['index-search-title'] = "What's your challenge";
 $lang['index-search-button'] = 'Challenge';
 $lang['index-search-questions'] = 'Challenges about';
 $lang['index-read-button'] = 'Read';
@@ -70,7 +71,7 @@ $lang['index-user-settings'] = 'Settings';
 $lang['index-user-logout'] = 'Logout';
 $lang['index-user-login'] = 'Login';
 $lang['index-leaderboard-points'] = 'Points';
-$lang['index-question-submit'] = 'Submit your Challenge';
+$lang['index-question-submit'] = 'Submit';
 $lang['index-question-intro'] = 'This challenge has [VIEWS] views, [ANSWERS] accepts';
 $lang['index-question-no_questions'] = 'No Challenges found';
 $lang['index-question-post'] = 'Post Your First Challenge';
