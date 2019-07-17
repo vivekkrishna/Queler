@@ -305,7 +305,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         }
 
                         echo '<h3 class="page-subheader name" style="margin:0;font-weight: bold;">' . $db->escape_value($_GET['feed']);
-                        echo "&nbsp;
+                        echo "<br>;
 			<div class='btn-group'>";
                         if ($tag) {
 
@@ -340,6 +340,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         $page = 1;
                     }
 
+                    /* sql query for a page/topic */
                     $total_count = Question::count_feed_for($current_user->id, $query, " ");
                     $pagination = new Pagination($page, $per_page, $total_count);
                     $questions = Question::get_feed_for($current_user->id, $query, " LIMIT {$per_page} OFFSET {$pagination->offset()} ");
@@ -424,12 +425,18 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             </p>
 
                             <br><p <?php echo $div_link; ?> style='cursor:pointer'>
-                                <?php $string = strip_tags($q->content);
-                                if (strlen($string) > 500) {
-                                    // truncate string
-                                    $stringCut = substr($string, 0, 500);
-                                    // make sure it ends in a word so assassinate doesn't become ass...
-                                    $string = substr($stringCut, 0, strrpos($stringCut, ' ')) . "... <a href='{$url_mapper['questions/view']}{$url_type}' >({$lang['index-question-read_more']})</a>";
+                                <?php
+                                $string = '';
+                                if (strpos($q->content, 'embed-responsive') !== false) {
+                                    $string = $q->content;
+                                } else {
+                                    $string = strip_tags($q->content);
+                                    if (strlen($string) > 500) {
+                                        // truncate string
+                                        $stringCut = substr($string, 0, 500);
+                                        // make sure it ends in a word so assassinate doesn't become ass...
+                                        $string = substr($stringCut, 0, strrpos($stringCut, ' ')) . "... <a href='{$url_mapper['questions/view']}{$url_type}' >({$lang['index-question-read_more']})</a>";
+                                    }
                                 }
                                 echo profanity_filter($string); ?>
                             </p>
