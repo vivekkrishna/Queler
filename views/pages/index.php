@@ -304,7 +304,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             }
                         }
 
-                        echo '<h2 class="page-subheader name" style="margin:0">' . $db->escape_value($_GET['feed']);
+                        echo '<h3 class="page-subheader name" style="margin:0;font-weight: bold;">' . $db->escape_value($_GET['feed']);
                         echo "&nbsp;
 			<div class='btn-group'>";
                         if ($tag) {
@@ -328,7 +328,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         if ($current_user->can_see_this('admintopics.delete', $group)) {
                             echo "<a href='{$url_mapper['admin/']}&section=topics&id={$tag->id}&type=delete&hash={$random_hash}&ref=index' class='btn btn-sm btn-default ' onclick=\"return confirm('Are you sure you want to delete this record?');\"  ><i class='fa fa-times'></i> {$lang['btn-delete']}</a>";
                         }
-                        echo "</div></h2>";
+                        echo "</div></h3>";
 
                         echo "<p style='color:#A0A0A0'>" . strip_tags(nl2br($tag->description)) . "</p><hr style='clear:both'>";
                     }
