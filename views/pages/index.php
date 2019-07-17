@@ -369,14 +369,16 @@ require_once(VIEW_PATH.'pages/header.php'); ?>
 							<br><small><?php if(!$q->anonymous) { ?>@<?php echo $user->username; ?> | <?php } if($q->updated_at != "0000-00-00 00:00:00") { echo $lang['index-question-updated'] . " " . date_ago($q->updated_at); } else { echo $lang['index-question-created'] . " " . date_ago($q->created_at); }?></small>
 						</p>
 					</p>
-					<br><p <?php echo $div_link; ?> style='cursor:pointer'>
-						<?php $string = strip_tags($q->content);
-							if (strlen($string) > 500) {
+
+					<br>
+                    <p <?php echo $div_link; ?> style='cursor:pointer'>
+						<?php $string = $q->content;
+							/*if (strlen($string) > 500) {
 								// truncate string
 								$stringCut = substr($string, 0, 500);
 								// make sure it ends in a word so assassinate doesn't become ass...
 								$string = substr($stringCut, 0, strrpos($stringCut, ' '))."... <a href='{$url_mapper['questions/view']}{$url_type}' >({$lang['index-question-read_more']})</a>"; 
-							}
+							}*/
 							echo profanity_filter($string);?>
 					</p>
 					<br>
