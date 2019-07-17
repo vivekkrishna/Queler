@@ -305,8 +305,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         }
 
                         echo '<h3 class="page-subheader name" style="margin:0;font-weight: bold;">' . $db->escape_value($_GET['feed']);
-                        echo "<br>;
-			<div class='btn-group'>";
+                        echo "<p style='color:#A0A0A0'>" . strip_tags(nl2br($tag->description)) . "</p><hr style='clear:both'>";
+                        echo "<br><div class='btn-group'>";
                         if ($tag) {
 
                             $f_follow_class = 'follow';
@@ -330,7 +330,6 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         }
                         echo "</div></h3>";
 
-                        echo "<p style='color:#A0A0A0'>" . strip_tags(nl2br($tag->description)) . "</p><hr style='clear:both'>";
                     }
 
                     $per_page = "20";
