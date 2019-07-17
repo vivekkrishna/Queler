@@ -51,8 +51,13 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
     <div class="container">
 
         <div class="row">
+            <!-- Left side bar -->
             <?php require_once(VIEW_PATH . 'pages/lt_sidebar.php'); ?>
+
+            <!-- News feed middle bar -->
             <div class="posts_container col-md-8" style="overflow:hidden">
+
+                <!-- Status bar - success or error messages -->
                 <?php
                 if (isset($_GET['edit']) && isset($_GET['msg']) && $_GET['edit'] == "success") :
                     $status_msg = $db->escape_value($_GET['msg']);
@@ -75,7 +80,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                 endif;
                 ?>
 
-
+                <!-- Notifications viewer -->
                 <?php
                 if (isset($_GET['notifications']) && $_GET['notifications'] == 'true') {
                     if (isset($_GET['hash']) && $_GET['type'] == 'read_all') {
@@ -128,7 +133,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             </center>
                         </h3><br><br>
                     <?php } ?>
-
+                    <!-- Leaderboard viewer -->
                     <?php
                 } elseif (isset($_GET['leaderboard']) && $_GET['leaderboard'] == 'true') {
                     ?>
@@ -198,6 +203,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                     if ($current_user->can_see_this('index.post', $group) && !isset($_GET['feed'])) {
                         ?>
 
+                        <!-- Choosing topics to follow box for first time login. -->
                         <?php if ($current_user->intro == '0') { ?>
                             <br class="clearfix visible-sm">
                             <div class="bs-callout bs-callout-success" style="">
@@ -221,6 +227,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             </div>
                         <?php } ?>
 
+                        <!-- Form to submit new challenges in the Home page -->
                         <form action="<?php echo $url_mapper['questions/create'] ?>" method="post" role="form"
                               enctype="multipart/form-data" class="facebook-share-box">
                             <div class="">
@@ -242,7 +249,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                             <div class="">
                                                 <textarea name="title" cols="40" rows="10" id="status_message"
                                                           class="form-control message"
-                                                          style="height: 62px; overflow: hidden;"
+                                                          style="height: 32px; overflow: hidden;"
                                                           placeholder="<?php echo $lang['index-search-title']; ?>"
                                                           required></textarea>
                                             </div>
@@ -276,6 +283,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
 
                     }
 
+                    /* Page or topic heading */
                     if (isset($_GET['feed']) && $_GET['feed'] != '') {
                         $feedreq = $db->escape_value($_GET['feed']);
                         $query = " AND feed LIKE '%{$feedreq}%' ";
@@ -296,8 +304,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             }
                         }
 
-                        echo '<h2 class="page-subheader name" style="margin:0">' . $lang['index-search-questions'] . ': ' . $db->escape_value($_GET['feed']);
-                        echo "&nbsp;<a href='" . WEB_LINK . "/rss/feed/" . $db->escape_value($_GET['feed']) . "' target='_blank'><img src='" . WEB_LINK . "/public/img/rss.png' style='width:25px'></a>&nbsp;
+                        echo '<h2 class="page-subheader name" style="margin:0">' . $db->escape_value($_GET['feed']);
+                        echo "&nbsp;
 			<div class='btn-group'>";
                         if ($tag) {
 
@@ -778,6 +786,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
 
             </div>
 
+            <!-- Right side bar -->
             <?php require_once(VIEW_PATH . 'pages/rt_sidebar.php'); ?>
 
         </div>

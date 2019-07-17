@@ -25,7 +25,7 @@ $chat = MiscFunction::get_function("chat");
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="<?php echo $title . " | " . APPSLOGAN; ?>">
     <meta name="keywords" content="<?php echo APPKEYWORDS; ?>">
-    <meta name="author" content="MichaelDesigns">
+    <meta name="author" content="choppak">
     <link rel="icon" href="<?php echo UPL_FILES; ?>/img/favicon.ico">
 
     <title><?php echo $title . " | " . APPNAME; ?></title>
