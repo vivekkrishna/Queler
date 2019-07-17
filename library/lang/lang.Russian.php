@@ -299,14 +299,13 @@ $lang['admin-general-chat-title'] = "- Chat Settings -";
 $lang['admin-general-chat-msg'] = "Enable chatting";
 
 
-
 $lang['questions-report-types'] = Array("Harassment: Not respectful towards a person or group",
-														"Spam: Undisclosed promotion for a link or product",
-														"Irrelevant: Does not address question that was asked",
-														"Plagiarism: Reusing content without attribution (link and blockquotes)",
-														"Joke Answer: Not a sincere answer",
-														"Poorly Written: Bad formatting, grammar, and spelling",
-														"Incorrect: Substantially incorrect and/or incorrect primary conclusions");
+    "Spam: Undisclosed promotion for a link or product",
+    "Irrelevant: Does not address question that was asked",
+    "Plagiarism: Reusing content without attribution (link and blockquotes)",
+    "Joke Answer: Not a sincere answer",
+    "Poorly Written: Bad formatting, grammar, and spelling",
+    "Incorrect: Substantially incorrect and/or incorrect primary conclusions");
 $lang['admin-general-posting-q_modal'] = "Open questions in modals";
 
 $lang['user-notification-settings-title'] = "Send Email notifications when:";

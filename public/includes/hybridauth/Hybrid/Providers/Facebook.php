@@ -14,7 +14,8 @@ use Facebook\Facebook as FacebookSDK;
  * Hybrid_Providers_Facebook use the Facebook PHP SDK created by Facebook
  * http://hybridauth.sourceforge.net/userguide/IDProvider_info_Facebook.html
  */
-class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
+class Hybrid_Providers_Facebook extends Hybrid_Provider_Model
+{
 
     /**
      * Default permissions, and a lot of them. You can change them from the configuration by setting the scope to what you want/need.
@@ -37,7 +38,8 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
     /**
      * {@inheritdoc}
      */
-    function initialize() {
+    function initialize()
+    {
         if (!$this->config["keys"]["id"] || !$this->config["keys"]["secret"]) {
             throw new Exception("Your application id and secret are required in order to connect to {$this->providerId}.", 4);
         }
@@ -64,7 +66,8 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
     /**
      * {@inheritdoc}
      */
-    function loginBegin() {
+    function loginBegin()
+    {
 
         $this->endpoint = $this->params['login_done'];
         $helper = $this->api->getRedirectLoginHelper();
@@ -79,7 +82,8 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
     /**
      * {@inheritdoc}
      */
-    function loginFinish() {
+    function loginFinish()
+    {
 
         $helper = $this->api->getRedirectLoginHelper();
         try {
@@ -120,14 +124,16 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
     /**
      * {@inheritdoc}
      */
-    function logout() {
+    function logout()
+    {
         parent::logout();
     }
 
     /**
      * {@inheritdoc}
      */
-    function getUserProfile() {
+    function getUserProfile()
+    {
         try {
             $fields = [
                 'id',
@@ -195,7 +201,8 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
      * Since the Graph API 2.0, the /friends endpoint only returns friend that also use your Facebook app.
      * {@inheritdoc}
      */
-    function getUserContacts() {
+    function getUserContacts()
+    {
         $apiCall = '?fields=link,name';
         $returnedContacts = [];
         $pagedList = true;
@@ -245,7 +252,8 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
      *      - me       : the user activity only
      * {@inheritdoc}
      */
-    function getUserActivity($stream = 'timeline') {
+    function getUserActivity($stream = 'timeline')
+    {
         try {
             if ($stream == "me") {
                 $response = $this->api->get('/me/feed', $this->token('access_token'));
