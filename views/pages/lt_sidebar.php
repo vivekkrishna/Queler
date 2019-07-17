@@ -11,7 +11,15 @@
         <li><a href="<?php echo $url_mapper['index/']; ?>"
                class="<?php echo $current; ?> col-md-12"><?php echo $lang['index-sidebar-top']; ?></a></li>
         <!-- TODO: Get trending videos and page. -->
-        <li><a href="<?php echo $url_mapper['trending/']; ?>"
+        <?php
+        $current = '';
+        if (isset($_GET['feed']) && $_GET['feed'] != '') {
+            if ($_GET['feed'] == 'trending') {
+                $current = 'current';
+            }
+        } ?>
+        <li>&nbsp;</li>
+        <li><a href="<?php echo $url_mapper['feed/'] . 'trending'; ?>"
                     class="<?php echo $current; ?> col-md-12"><?php echo $lang['index-sidebar-trending']; ?></a></li>
 
 <?php /* ?>
@@ -35,6 +43,7 @@
         <li>&nbsp;</li>
  <?php // */ ?>
 
+        <li>&nbsp;</li>
         <center><b><?php echo $lang['index-sidebar-subscriptions']; ?></b></center>
         <?php $tags = FollowRule::get_subscriptions('tag', $current_user->id, 'user_id', 'LIMIT 20');
         if ($tags) {
