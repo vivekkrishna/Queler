@@ -235,8 +235,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                     <li class="post-type">
                                         <p class="publisher">
                                             <img src="<?php echo $user_avatar; ?>" class="img-circle"
-                                                 style="float:<?php echo $lang['direction-left']; ?>;width:46px;margin-<?php echo $lang['direction-right']; ?>:10px">
-                                        <p class="name">
+                                                 style="float:<?php echo $lang['direction-left']; ?>;width:15px;margin-<?php echo $lang['direction-right']; ?>:10px">
+                                        <p style="font-size: 15px;">
                                             <a href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
                                         </p>
                                         </p>
