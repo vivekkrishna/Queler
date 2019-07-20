@@ -230,21 +230,17 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         <!-- Form to submit new challenges in the Home page -->
                 <?php /*?><form action="<?php echo $url_mapper['questions/create'] ?>" method="post" role="form"
                               enctype="multipart/form-data" class="facebook-share-box"><?php */?>
-                            <div class="">
-                                <ul class="post-types">
-                                    <li class="post-type">
-                                        <p class="publisher">
-                                            <img src="<?php echo $user_avatar; ?>" class="img-circle"
-                                                 style="float:<?php echo $lang['direction-left']; ?>;width:15px;margin-<?php echo $lang['direction-right']; ?>:10px">
-                                        <p style="font-size: 15px;">
-                                            <a href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
-                                        </p>
-                                        </p>
-                                    </li>
-                                </ul>
-                                <p style="font-size: 20px;">
-                                    <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
-                                </p>
+                        <div class="question-element">
+                            <p>
+                                <img src="<?php echo $user_avatar; ?>" class="img-circle"
+                                     style="float:<?php echo $lang['direction-left']; ?>;width:15px;margin-<?php echo $lang['direction-right']; ?>:10px">
+                            <p style="font-size: 15px;">
+                                <a href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
+                            </p>
+                            </p>
+                            <p style="font-size: 18px; font-weight: bold;">
+                                <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
+                            </p>
                                 <?php /*?>
                                 <div class="share">
                                     <div class="arrow"></div>
