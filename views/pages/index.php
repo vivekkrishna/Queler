@@ -396,12 +396,12 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             }
                             ?>
                             <div class="question-element">
-                            <h2 class="title"><a href="<?php echo $q_link; ?>"><?php echo strip_tags($q->title); ?></a>
-                            </h2>
                             <small><?php $str = $lang['index-question-intro'];
                                 $str = str_replace('[VIEWS]', $q->views, $str);
                                 $str = str_replace('[ANSWERS]', $q->answers, $str);
                                 echo $str; ?></small>
+                            <h2 class="title"><a href="<?php echo $q_link; ?>"><?php echo strip_tags($q->title); ?></a>
+                            </h2>
                             <p class="publisher">
                                 <img src="<?php echo $quser_avatar; ?>" class="img-circle"
                                      style="float:<?php echo $lang['direction-left']; ?>;width:46px;margin-<?php echo $lang['direction-right']; ?>:10px">
@@ -411,7 +411,6 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                 } else { ?>
                                     <a href="<?php echo $url_mapper['users/view'] . $q->user_id; ?>/"><?php echo $user->f_name . " " . $user->l_name; ?></a>
                                 <?php } ?>
-                                <br>
                                 <small><?php if (!$q->anonymous) { ?>@<?php echo $user->username; ?> | <?php }
                                     if ($q->updated_at != "0000-00-00 00:00:00") {
                                         echo $lang['index-question-updated'] . " " . date_ago($q->updated_at);
@@ -434,6 +433,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                         $string = substr($stringCut, 0, strrpos($stringCut, ' ')) . "... <a href='{$url_mapper['questions/view']}{$url_type}' >({$lang['index-question-read_more']})</a>";
                                     }
                                 }
+                                $string = str_replace("<p><br></p>", "", $string);
                                 echo profanity_filter($string); ?>
                             </p>
                             <?php if ($current_user->can_see_this('questions.interact', $group)) { ?><p
