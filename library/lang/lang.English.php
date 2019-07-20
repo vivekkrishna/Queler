@@ -56,7 +56,7 @@ $lang['btn-close_account'] = 'Close Account';
 
 //Index page
 $lang['index-search-site'] = "Search Queler";
-$lang['index-search-title'] = "What's your challenge title?";
+$lang['index-search-title'] = "What's your challenge?";
 $lang['index-search-button'] = 'Challenge';
 $lang['index-search-questions'] = 'Challenges about';
 $lang['index-read-button'] = 'Read';

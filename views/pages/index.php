@@ -233,10 +233,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         <div class="question-element">
                             <p>
                                 <img src="<?php echo $user_avatar; ?>" class="img-circle"
-                                     style="float:<?php echo $lang['direction-left']; ?>;width:15px;margin-<?php echo $lang['direction-right']; ?>:10px">
-                            <p style="font-size: 15px;">
-                                <a href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
-                            </p>
+                                     style="float:<?php echo $lang['direction-left']; ?>;width:20px;margin-<?php echo $lang['direction-right']; ?>:10px">
+                                <a style="font-size: 15px;" href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
                             </p>
                             <p style="font-size: 18px; font-weight: bold;">
                                 <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
@@ -422,8 +420,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                     } ?></small>
                             </p>
                             </p>
-
-                            <br><p <?php echo $div_link; ?> style='cursor:pointer'>
+                            <p <?php echo $div_link; ?> style='cursor:pointer'>
                                 <?php
                                 $string = '';
                                 if (strpos($q->content, 'embed-responsive') !== false) {
@@ -439,7 +436,6 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                 }
                                 echo profanity_filter($string); ?>
                             </p>
-                            <br>
                             <?php if ($current_user->can_see_this('questions.interact', $group)) { ?><p
                                     class="footer question-like-machine">
                                 <?php if ($current_user->can_see_this("answers.create", $group)) { ?><a
