@@ -241,12 +241,10 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                         </p>
                                         </p>
                                     </li>
-                                    <li>
-                                        <p style="font-size: 35px;">
-                                            <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
-                                        </p>
-                                    </li>
                                 </ul>
+                                <p style="font-size: 20px;">
+                                    <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
+                                </p>
                                 <?php /*?>
                                 <div class="share">
                                     <div class="arrow"></div>
