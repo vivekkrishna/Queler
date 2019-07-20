@@ -5,7 +5,7 @@ body {
 }
 
 .question-element {
-    padding: 10px;
+    padding: 3px;
 }
 
 .question-element a, .publisher a {
@@ -30,7 +30,7 @@ body {
 }
 
 .question-element .name {
-    padding-top: 5px !important;
+    padding-top: 2px !important;
 }
 
 .question-element:hover {
