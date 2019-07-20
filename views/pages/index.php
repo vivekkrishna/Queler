@@ -396,12 +396,12 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             }
                             ?>
                             <div class="question-element">
+                            <h2 class="title"><a href="<?php echo $q_link; ?>"><?php echo strip_tags($q->title); ?></a>
+                            </h2>
                             <small><?php $str = $lang['index-question-intro'];
                                 $str = str_replace('[VIEWS]', $q->views, $str);
                                 $str = str_replace('[ANSWERS]', $q->answers, $str);
                                 echo $str; ?></small>
-                            <h1 class="title"><a href="<?php echo $q_link; ?>"><?php echo strip_tags($q->title); ?></a>
-                            </h1>
                             <p class="publisher">
                                 <img src="<?php echo $quser_avatar; ?>" class="img-circle"
                                      style="float:<?php echo $lang['direction-left']; ?>;width:46px;margin-<?php echo $lang['direction-right']; ?>:10px">
