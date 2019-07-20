@@ -411,6 +411,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                 } else { ?>
                                     <a href="<?php echo $url_mapper['users/view'] . $q->user_id; ?>/"><?php echo $user->f_name . " " . $user->l_name; ?></a>
                                 <?php } ?>
+                                <br>
                                 <small><?php if (!$q->anonymous) { ?>@<?php echo $user->username; ?> | <?php }
                                     if ($q->updated_at != "0000-00-00 00:00:00") {
                                         echo $lang['index-question-updated'] . " " . date_ago($q->updated_at);
