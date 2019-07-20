@@ -228,8 +228,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         <?php } ?>
 
                         <!-- Form to submit new challenges in the Home page -->
-                        <form action="<?php echo $url_mapper['questions/create'] ?>" method="post" role="form"
-                              enctype="multipart/form-data" class="facebook-share-box">
+                <?php /*?><form action="<?php echo $url_mapper['questions/create'] ?>" method="post" role="form"
+                              enctype="multipart/form-data" class="facebook-share-box"><?php */?>
                             <div class="">
                                 <ul class="post-types">
                                     <li class="post-type">
@@ -241,7 +241,13 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                         </p>
                                         </p>
                                     </li>
+                                    <li>
+                                        <p style="font-size: 35px;">
+                                            <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
+                                        </p>
+                                    </li>
                                 </ul>
+                                <?php /*?>
                                 <div class="share">
                                     <div class="arrow"></div>
                                     <div class="panel panel-default">
@@ -267,8 +273,9 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                         </div>
                                     </div>
                                 </div>
+                                <?php */?>
                             </div>
-                        </form>
+                        <!--</form>-->
 
 
                         <?php
