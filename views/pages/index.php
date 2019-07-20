@@ -239,37 +239,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             <p style="font-size: 18px; font-weight: bold;">
                                 <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
                             </p>
-                                <?php /*?>
-                                <div class="share">
-                                    <div class="arrow"></div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <div class="">
-                                                <textarea name="title" cols="40" rows="10" id="status_message"
-                                                          class="form-control message"
-                                                          style="height: 25px; overflow: hidden;"
-                                                          placeholder="<?php echo $lang['index-search-title']; ?>"
-                                                          required></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="panel-footer" style="height: 20px;">
-                                            <div class="form-group">
-                                                <input type="submit" name="submit"
-                                                       value="<?php echo $lang['index-question-submit']; ?>"
-                                                       class="btn btn-default">
-                                                <?php
-                                                $_SESSION[$elhash] = $random_hash;
-                                                echo "<input type=\"hidden\" name=\"hash\" value=\"" . $random_hash . "\" readonly/>";
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php */?>
                             </div>
                         <!--</form>-->
-
-
                         <?php
                     }
                     $query = "";
@@ -420,6 +391,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                     } ?></small>
                             </p>
                             </p>
+                            <br>
                             <p <?php echo $div_link; ?> style='cursor:pointer'>
                                 <?php
                                 $string = '';
