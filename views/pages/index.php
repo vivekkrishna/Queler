@@ -237,7 +237,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                 <a style="font-size: 20px;" href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
                             </p>
                             <p>
-                                <a onMouseOver="this.style.color='#b92b27'; this.style.fontWeight='bolder'" style="font-size: 25px; font-weight: bold; color: #949494;;" href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
+                                <a onMouseOver="this.style.color='#b92b27'; this.style.fontWeight='bolder'" style="font-family: 'Lobster', Tahoma, Arial; font-size: 25px; font-weight: bold; color: #949494;;" href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
                             </p>
                             </div>
                         <br>
