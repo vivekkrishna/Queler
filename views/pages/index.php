@@ -1042,6 +1042,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         <?php
                     }
                     <?php */?>
+                    <?php
                 }
 
                 if (isset($pagination) && $pagination->total_pages() > 1) {
