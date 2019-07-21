@@ -94,7 +94,7 @@ class FeedRule Extends OneClass
                         " . DBTP . "questions.audio_location, " . DBTP . "questions.file_location, " . DBTP . "questions.anonymous, " . DBTP . "questions.published FROM " . DBTP . "follows_rules INNER JOIN 
                         " . DBTP . "questions ON " . DBTP . "follows_rules.obj_id=" . DBTP . "questions.user_id WHERE 
                         (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
-                        ORDER BY created_at DESC)");
+                        ORDER BY created_at DESC) as feedtable");
 
         return mysqli_result($result, 0);
     }
