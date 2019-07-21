@@ -44,18 +44,15 @@ class FeedRule Extends OneClass
         $answersFeed = static::preform_sql(
                     "SELECT " . DBTP . "answers.user_id, " . DBTP . "answers.q_id, " . DBTP . "questions.title, " . DBTP . "questions.slug," . DBTP . "questions.answers as q_answers," . DBTP . "questions.feed, " . DBTP . "answers.content, " . DBTP . "answers.likes,
                         " . DBTP . "answers.views, " . DBTP . "answers.dislikes, " . DBTP . "answers.created_at, " . DBTP . "answers.updated_at, 'answer' as content_type, null as accepts, " . DBTP . "answers.video_location,
-                        " . DBTP . "answers.audio_location, " . DBTP . "answers.file_location, " . DBTP . "questions.anonymous, " . DBTP . "questions.published
-                        FROM " . DBTP . "follows_rules
-                        INNER JOIN " . DBTP . "answers ON " . DBTP . "follows_rules.obj_id=" . DBTP . "answers.user_id
-                        INNER JOIN " . DBTP . "questions ON " . DBTP . "answers.q_id=" . DBTP . "questions.id
-                        WHERE (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
-                        UNION
-                        SELECT " . DBTP . "questions.user_id, " . DBTP . "questions.id as q_id, " . DBTP . "questions.title, " . DBTP . "questions.slug," . DBTP . "questions.answers as q_answers," . DBTP . "questions.feed, " . DBTP . "questions.content, " . DBTP . "questions.likes,
+                        " . DBTP . "answers.audio_location, " . DBTP . "answers.file_location, " . DBTP . "questions.anonymous, " . DBTP . "questions.published FROM " . DBTP . "follows_rules INNER JOIN 
+                        " . DBTP . "answers ON " . DBTP . "follows_rules.obj_id=" . DBTP . "answers.user_id INNER JOIN 
+                        " . DBTP . "questions ON " . DBTP . "answers.q_id=" . DBTP . "questions.id WHERE 
+                        (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id) UNION SELECT 
+                        " . DBTP . "questions.user_id, " . DBTP . "questions.id as q_id, " . DBTP . "questions.title, " . DBTP . "questions.slug," . DBTP . "questions.answers as q_answers," . DBTP . "questions.feed, " . DBTP . "questions.content, " . DBTP . "questions.likes,
                         " . DBTP . "questions.views, " . DBTP . "questions.dislikes, " . DBTP . "questions.created_at, " . DBTP . "questions.updated_at, 'question' as content_type, " . DBTP . "questions.answers as accepts, " . DBTP . "questions.video_location,
-                        " . DBTP . "questions.audio_location, " . DBTP . "questions.file_location, , " . DBTP . "questions.anonymous, " . DBTP . "questions.published
-                        FROM " . DBTP . "follows_rules
-                        INNER JOIN " . DBTP . "questions ON " . DBTP . "follows_rules.obj_id=" . DBTP . "questions.user_id
-                        WHERE (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
+                        " . DBTP . "questions.audio_location, " . DBTP . "questions.file_location, , " . DBTP . "questions.anonymous, " . DBTP . "questions.published FROM " . DBTP . "follows_rules INNER JOIN 
+                        " . DBTP . "questions ON " . DBTP . "follows_rules.obj_id=" . DBTP . "questions.user_id WHERE 
+                        (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
                         ORDER BY created_at DESC" . $string);
         return $answersFeed;
     }
@@ -64,20 +61,17 @@ class FeedRule Extends OneClass
     {
         global $db;
 
-        $result = $db->query("SELECT count(*) from(SELECT " . DBTP . "answers.user_id, " . DBTP . "questions.title, " . DBTP . "questions.feed, " . DBTP . "answers.content, " . DBTP . "answers.likes,
-                        " . DBTP . "answers.dislikes, " . DBTP . "answers.created_at, " . DBTP . "answers.updated_at, 'answer' as content_type, null as accepts, " . DBTP . "answers.video_location,
-                        " . DBTP . "answers.audio_location, " . DBTP . "answers.file_location, " . DBTP . "questions.anonymous, " . DBTP . "questions.published
-                        FROM " . DBTP . "follows_rules
-                        INNER JOIN " . DBTP . "answers ON " . DBTP . "follows_rules.obj_id=" . DBTP . "answers.user_id
-                        INNER JOIN " . DBTP . "questions ON " . DBTP . "answers.q_id=" . DBTP . "questions.id
-                        WHERE (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
-                        UNION
-                        SELECT " . DBTP . "questions.user_id, " . DBTP . "questions.title, " . DBTP . "questions.feed, " . DBTP . "questions.content, " . DBTP . "questions.likes,
-                        " . DBTP . "questions.dislikes, " . DBTP . "questions.created_at, " . DBTP . "questions.updated_at, 'question' as content_type, " . DBTP . "questions.answers as accepts, " . DBTP . "questions.video_location,
-                        " . DBTP . "questions.audio_location, " . DBTP . "questions.file_location, , " . DBTP . "questions.anonymous, " . DBTP . "questions.published
-                        FROM " . DBTP . "follows_rules
-                        INNER JOIN " . DBTP . "questions ON " . DBTP . "follows_rules.obj_id=" . DBTP . "questions.user_id
-                        WHERE (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
+        $result = $db->query("SELECT count(*) from(SELECT " . DBTP . "answers.user_id, " . DBTP . "answers.q_id, " . DBTP . "questions.title, " . DBTP . "questions.slug," . DBTP . "questions.answers as q_answers," . DBTP . "questions.feed, " . DBTP . "answers.content, " . DBTP . "answers.likes,
+                        " . DBTP . "answers.views, " . DBTP . "answers.dislikes, " . DBTP . "answers.created_at, " . DBTP . "answers.updated_at, 'answer' as content_type, null as accepts, " . DBTP . "answers.video_location,
+                        " . DBTP . "answers.audio_location, " . DBTP . "answers.file_location, " . DBTP . "questions.anonymous, " . DBTP . "questions.published FROM " . DBTP . "follows_rules INNER JOIN 
+                        " . DBTP . "answers ON " . DBTP . "follows_rules.obj_id=" . DBTP . "answers.user_id INNER JOIN 
+                        " . DBTP . "questions ON " . DBTP . "answers.q_id=" . DBTP . "questions.id WHERE 
+                        (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id) UNION SELECT 
+                        " . DBTP . "questions.user_id, " . DBTP . "questions.id as q_id, " . DBTP . "questions.title, " . DBTP . "questions.slug," . DBTP . "questions.answers as q_answers," . DBTP . "questions.feed, " . DBTP . "questions.content, " . DBTP . "questions.likes,
+                        " . DBTP . "questions.views, " . DBTP . "questions.dislikes, " . DBTP . "questions.created_at, " . DBTP . "questions.updated_at, 'question' as content_type, " . DBTP . "questions.answers as accepts, " . DBTP . "questions.video_location,
+                        " . DBTP . "questions.audio_location, " . DBTP . "questions.file_location, , " . DBTP . "questions.anonymous, " . DBTP . "questions.published FROM " . DBTP . "follows_rules INNER JOIN 
+                        " . DBTP . "questions ON " . DBTP . "follows_rules.obj_id=" . DBTP . "questions.user_id WHERE 
+                        (((" . DBTP . "follows_rules.obj_type='user') OR (" . DBTP . "follows_rules.obj_type='tag')) AND " . DBTP . "follows_rules.user_id = $user_id)
                         ORDER BY created_at DESC)");
 
         return mysqli_result($result, 0);
