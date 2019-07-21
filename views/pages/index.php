@@ -236,10 +236,11 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                      style="float:<?php echo $lang['direction-left']; ?>;width:20px;margin-<?php echo $lang['direction-right']; ?>:10px">
                                 <a style="font-size: 15px;" href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
                             </p>
-                            <p style="font-size: 18px; font-weight: bold;">
-                                <a href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
+                            <p>
+                                <a style="font-size: 18px; color:blue;" href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
                             </p>
                             </div>
+                        <br>
                         <!--</form>-->
                         <?php
                     }
@@ -308,7 +309,375 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         $page = 1;
                     }
 
-                    /* sql query for a page/topic */
+                    $total_count = FeedRule::getCountOfHomeFeed($current_user->id);
+                    #$total_count = Question::count_feed_for($current_user->id, $query, " ");
+                    $pagination = new Pagination($page, $per_page, $total_count);
+                    $feeds = FeedRule::getHomePageFeedWithMysqlExtension($current_user->id," LIMIT {$per_page} OFFSET {$pagination->offset()} ");
+
+                    $t = 1;
+
+                    if ($feeds) {
+                        foreach ($feeds as $q) {
+                            $user = User::get_specific_id($q->user_id);
+                            if ($user->avatar) {
+                                $img = File::get_specific_id($user->avatar);
+                                $quser_avatar = WEB_LINK . "public/" . $img->image_path();
+                                $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
+                                if (!file_exists($quser_avatar_path)) {
+                                    $quser_avatar = WEB_LINK . 'public/img/avatar.png';
+                                }
+                            } else {
+                                $quser_avatar = WEB_LINK . 'public/img/avatar.png';
+                            }
+
+                            if ($q->anonymous) {
+                                $quser_avatar = WEB_LINK . 'public/img/avatar.png';
+                            }
+
+                            $upvote_class = 'upvote';
+                            $downvote_class = 'downvote';
+
+                            $upvote_txt = $lang['btn-like'];
+                            $liked = $q->likes;#LikeRule::check_for_obj('question', "like", $q->id, $current_user->id);
+                            if ($liked) {
+                                $upvote_txt = $lang['btn-liked'];
+                                $upvote_class = 'active undo-upvote';
+                                $downvote_class = 'downvote disabled';
+                            }
+
+                            $downvote_txt = $lang['btn-dislike'];
+                            $disliked = $q->dislikes;#LikeRule::check_for_obj('question', "dislike", $q->id, $current_user->id);
+                            if ($disliked) {
+                                $downvote_txt = $lang['btn-disliked'];
+                                $upvote_class = 'upvote disabled';
+                                $downvote_class = 'active undo-downvote';
+                            }
+                            if (URLTYPE == 'slug') {
+                                $url_type = $q->slug;
+                            } else {
+                                $url_type = $q->q_id;
+                            }
+
+                            $act_link = $url_mapper['questions/view'] . $url_type;
+                            if ($q->q_answers && isset($settings['q_modal']) && $settings['q_modal'] == '1') {
+                                $q_link = '#q-' . $q->q_id . '-sneak" data-toggle="modal';
+                                $div_link = " data-link='q-{$q->q_id}-sneak' class='open_div' ";
+                            } else {
+                                $q_link = $url_mapper['questions/view'] . $url_type;
+                                $div_link = " data-link='{$q_link}' class='open_link' ";
+                            }
+                            ?>
+                            <div class="question-element">
+                            <small><?php $str = $lang['index-question-intro'];
+                            if($q->content_type == "answer"){
+                                $str = $lang['index-answer-intro'];
+                            }
+                                $str = str_replace('[VIEWS]', $q->views, $str);
+                                $str = str_replace('[ANSWERS]', $q->q_answers, $str);
+                                echo $str; ?></small>
+                            <h2 class="title"><a href="<?php echo $q_link; ?>"><?php echo strip_tags($q->title); ?></a>
+                            </h2>
+                            <p class="publisher">
+                                <img src="<?php echo $quser_avatar; ?>" class="img-circle"
+                                     style="float:<?php echo $lang['direction-left']; ?>;width:46px;margin-<?php echo $lang['direction-right']; ?>:10px">
+                            <p class="name">
+                                <?php if ($q->anonymous) {
+                                    echo $lang['user-anonymous'];
+                                } else { ?>
+                                    <a href="<?php echo $url_mapper['users/view'] . $q->user_id; ?>/"><?php echo $user->f_name . " " . $user->l_name; ?></a>
+                                <?php } ?>
+                                <br>
+                                <small><?php if (!$q->anonymous) { ?>@<?php echo $user->username; ?> | <?php }
+                                    if ($q->updated_at != "0000-00-00 00:00:00") {
+                                        echo $lang['index-question-updated'] . " " . date_ago($q->updated_at);
+                                    } else {
+                                        echo $lang['index-question-created'] . " " . date_ago($q->created_at);
+                                    } ?></small>
+                            </p>
+                            </p>
+                            <br>
+                            <p <?php echo $div_link; ?> style='cursor:pointer'>
+                                <?php
+                                $string = '';
+                                if (strpos($q->content, 'embed-responsive') !== false) {
+                                    $string = $q->content;
+                                } else {
+                                    $string = strip_tags($q->content);
+                                    if (strlen($string) > 500) {
+                                        // truncate string
+                                        $stringCut = substr($string, 0, 500);
+                                        // make sure it ends in a word so assassinate doesn't become ass...
+                                        $string = substr($stringCut, 0, strrpos($stringCut, ' ')) . "... <a href='{$url_mapper['questions/view']}{$url_type}' >({$lang['index-question-read_more']})</a>";
+                                    }
+                                }
+                                $string = str_replace("<p><br></p>", "", $string);
+                                echo profanity_filter($string); ?>
+                            </p>
+                            <?php if ($current_user->can_see_this('questions.interact', $group)) { ?><p
+                                    class="footer question-like-machine">
+                                <?php if ($current_user->can_see_this("answers.create", $group)) { ?><a
+                                    href="<?php echo $url_mapper['questions/view'] . $url_type; ?>#answer-question"
+                                    class="btn btn-default"><i
+                                            class="fa fa-pencil"></i> <?php echo $lang['index-question-answer'];
+                                    if ($q->accepts) {
+                                        echo " | {$q->accepts}";
+                                    } ?></a><?php } ?>
+                                <?php if ($q->user_id != $current_user->id) { ?><a href="#me"
+                                                                                   class="btn btn-default <?php echo $upvote_class; ?>"
+                                                                                   name="<?php echo $q->q_id; ?>"
+                                                                                   value="<?php echo $q->likes; ?>"
+                                                                                   data-obj="question"
+                                                                                   data-lbl="<?php echo $lang['btn-like'] ?>"
+                                                                                   data-lbl-active="<?php echo $lang['btn-liked']; ?>"  >
+                                    <i class="fa fa-thumbs-o-up"></i> <?php echo $upvote_txt;
+                                    if ($q->likes) {
+                                        echo " | {$q->likes}";
+                                    } ?></a>
+                                <a href="#me" class="btn btn-default <?php echo $downvote_class; ?>"
+                                   name="<?php echo $q->q_id; ?>" value="<?php echo $q->dislikes; ?>" data-obj="question"
+                                   data-lbl="<?php echo $lang['btn-dislike']; ?>"
+                                   data-lbl-active="<?php echo $lang['btn-disliked']; ?>"><i
+                                            class="fa fa-thumbs-o-down"></i> <?php echo $downvote_txt;
+                                    if ($q->dislikes) {
+                                        echo " | {$q->dislikes}";
+                                    } ?></a><?php } ?>
+                                </p><?php } ?>
+                            <?php if ($q->accepts) { ?>
+                                <!-- Modal -->
+                                <div class="modal fade in" id="q-<?php echo $q->q_id; ?>-sneak" tabindex="-1"
+                                     role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close" style="font-size:30px">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <small><img src="<?php echo $quser_avatar; ?>" class="img-circle"
+                                                            style="float:<?php echo $lang['direction-left']; ?>;width:23px;margin-<?php echo $lang['direction-right']; ?>:10px">
+                                                    Question asked by <?php if ($q->anonymous) {
+                                                        echo $lang['user-anonymous'];
+                                                    } else { ?><b><a
+                                                                href="<?php echo $url_mapper['users/view'] . $q->user_id; ?>/"
+                                                                style="color:black"><?php echo $user->f_name . " " . $user->l_name; ?></a>
+                                                        </b><?php } ?> , Posted <?php echo date_ago($q->created_at); ?>
+                                                </small>
+                                                </small>
+                                                <h1 class="title" style="margin-top:5px"><b
+                                                            class="col-md-12 quickfit"><?php echo strip_tags($q->title); ?></b>
+                                                </h1>
+
+                                            </div>
+                                            <div class="modal-body" style="padding:25px">
+
+                                                <?php
+                                                if (URLTYPE == 'slug') {
+                                                    $url_type = $q->slug;
+                                                } else {
+                                                    $url_type = $q->q_id;
+                                                }
+                                                $a = Answer::get_best_answer_for($q->q_id);
+                                                if ($a) {
+                                                    //foreach($answers as $a) {
+
+                                                    $user = User::get_specific_id($a->user_id);
+                                                    if ($user->avatar) {
+                                                        $img = File::get_specific_id($user->avatar);
+                                                        $quser_avatar = WEB_LINK . "public/" . $img->image_path();
+                                                        $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
+                                                        if (!file_exists($quser_avatar_path)) {
+                                                            $quser_avatar = WEB_LINK . 'public/img/avatar.png';
+                                                        }
+                                                    } else {
+                                                        $quser_avatar = WEB_LINK . 'public/img/avatar.png';
+                                                    }
+
+
+                                                    $upvote_class = 'upvote';
+                                                    $downvote_class = 'downvote';
+
+                                                    $upvote_txt = $lang['btn-like'];
+                                                    $liked = LikeRule::check_for_obj('answer', "like", $a->id, $current_user->id);
+                                                    if ($liked) {
+                                                        $upvote_txt = $lang['btn-liked'];
+                                                        $upvote_class = 'active undo-upvote';
+                                                        $downvote_class = 'downvote disabled';
+                                                    }
+
+                                                    $downvote_txt = $lang['btn-dislike'];
+                                                    $disliked = LikeRule::check_for_obj('answer', "dislike", $a->id, $current_user->id);
+                                                    if ($disliked) {
+                                                        $downvote_txt = $lang['btn-disliked'];
+                                                        $upvote_class = 'upvote disabled';
+                                                        $downvote_class = 'active undo-downvote';
+                                                    }
+
+
+                                                    ?>
+
+                                                    <div class="" id="answer-<?php echo $a->id; ?>">
+
+                                                        <img src="<?php echo $quser_avatar; ?>" class="img-circle"
+                                                             style="float:<?php echo $lang['direction-left']; ?>;width:46px;margin-<?php echo $lang['direction-right']; ?>:10px">
+                                                        <p class="name" style='padding-top:0 !important'>
+                                                            <b><a href="<?php echo $url_mapper['users/view'] . $a->user_id; ?>/"><?php echo $user->f_name . " " . $user->l_name; ?></a></b><?php if ($user->comment) {
+                                                                echo " " . $user->comment;
+                                                            } ?>
+
+                                                            <?php if ($a->user_id != $current_user->id && $current_user->can_see_this('users.follow', $group)) { ?>
+                                                                <?php
+                                                                $u_follow_class = 'follow';
+                                                                $follow_txt = $lang['btn-follow'];
+                                                                $followed = FollowRule::check_for_obj('user', $user->id, $current_user->id);
+                                                                if ($followed) {
+                                                                    $follow_txt = $lang['btn-followed'];
+                                                                    $u_follow_class = 'active unfollow';
+                                                                }
+                                                                ?>
+                                                                &nbsp;&nbsp;<a href="#me"
+                                                                               class="btn btn-sm btn-default <?php echo $u_follow_class; ?>"
+                                                                               name="<?php echo $user->id; ?>"
+                                                                               value="<?php echo $user->follows; ?>"
+                                                                               data-obj="User"
+                                                                               data-lbl="<?php echo $lang['btn-follow']; ?>"
+                                                                               data-lbl-active="<?php echo $lang['btn-followed']; ?>"><i
+                                                                            class="fa fa-user-plus"></i> <?php echo $follow_txt; ?>
+                                                                    | <?php echo $user->follows; ?></a>
+                                                            <?php } ?>
+                                                            <br>
+                                                            <small>@<?php echo $user->username; ?>
+                                                                | <?php if ($a->updated_at != "0000-00-00 00:00:00") {
+                                                                    echo $lang['index-question-updated'] . ' ' . date_ago($a->updated_at);
+                                                                } else {
+                                                                    echo $lang['index-question-created'] . ' ' . date_ago($a->created_at);
+                                                                } ?></small>
+                                                        </p>
+                                                    </div><br>
+                                                    <p class="question-content">
+                                                        <?php $content = str_replace('\\', '', $a->content);
+                                                        $content = str_replace('<script', '', $content);
+                                                        $content = str_replace('</script>', '', $content);
+                                                        echo profanity_filter($content); ?>
+                                                    </p>
+
+
+                                                    <?php
+
+                                                } else {
+                                                    echo "No Answers Yet!";
+                                                }
+                                                ?>
+
+                                            </div>
+
+                                            <div class="modal-footer ">
+
+                                                <div style="float:<?php echo $lang['direction-left']; ?>">
+
+                                                    <?php if ($a && $current_user->can_see_this('questions.interact', $group)) { ?>
+                                                        <div class="btn-group question-like-machine">
+                                                            <?php if ($current_user->can_see_this("answers.create", $group)) { ?>
+                                                            <a
+                                                                    href="<?php echo $url_mapper['questions/view'] . $url_type; ?>#answer-question"
+                                                                    class="btn btn-default"><i
+                                                                        class="fa fa-pencil"></i> <?php echo $lang['index-question-answer'];
+                                                                if ($q->accepts) {
+                                                                    echo " | {$q->accepts}";
+                                                                } ?></a><?php } ?>
+                                                            <?php if ($a->user_id != $current_user->id) { ?>
+                                                                <ahref="#me"
+                                                                class="btn btn-default <?php echo $upvote_class; ?>"
+                                                                name="<?php echo $a->id; ?>"
+                                                                value="<?php echo $a->likes; ?>"
+                                                                data-obj="answer"
+                                                                data-lbl="<?php echo $lang['btn-like']; ?>"
+                                                                data-lbl-active="<?php echo $lang['btn-liked']; ?>" >
+                                                                <i class="fa fa-thumbs-o-up"></i> <?php echo $upvote_txt; ?>
+                                                                | <?php echo $a->likes; ?></a>
+                                                            <a href="#me"
+                                                               class="btn btn-default <?php echo $downvote_class; ?>"
+                                                               name="<?php echo $a->id; ?>"
+                                                               value="<?php echo $a->dislikes; ?>" data-obj="answer"
+                                                               data-lbl="<?php echo $lang['btn-dislike']; ?>"
+                                                               data-lbl-active="<?php echo $lang['btn-disliked']; ?>"><i
+                                                                        class="fa fa-thumbs-o-down"></i> <?php echo $downvote_txt; ?>
+                                                                | <?php echo $a->dislikes; ?></a><?php } else { ?>
+
+                                                                <a href="#me" class="btn btn-default disabled"><i
+                                                                            class="fa fa-thumbs-o-up"></i> <?php echo $upvote_txt; ?>
+                                                                    | <?php echo $a->likes; ?></a>
+                                                                <a href="#me" class="btn btn-default disabled"><i
+                                                                            class="fa fa-thumbs-o-down"></i> <?php echo $downvote_txt; ?>
+                                                                    | <?php echo $a->dislikes; ?></a>
+                                                            <?php } ?>
+                                                            <div class="btn-group">
+                                                                <button type="button"
+                                                                        class="btn btn-default dropdown-toggle"
+                                                                        data-toggle="dropdown">
+                                                                    <?php echo $lang['btn-tools']; ?> <span
+                                                                            class="caret"></span></button>
+                                                                <ul class="dropdown-menu" role="menu"
+                                                                    style="width:100px; background-color:white">
+
+                                                                    <?php if ($current_user->can_see_this('answers.update', $group)) { ?>
+                                                                        <li>
+                                                                        <a href="<?php echo $url_mapper['answers/edit'] . $url_type; ?>&type=edit_answer&id=<?php echo $a->id; ?>&hash=<?php echo $random_hash; ?>#answer-question">Edit</a>
+                                                                        </li><?php } ?>
+                                                                    <?php if ($current_user->can_see_this('answers.delete', $group)) { ?>
+                                                                        <li>
+                                                                        <a href="<?php echo $url_mapper['answers/delete'] . $url_type; ?>&type=delete_answer&id=<?php echo $a->id; ?>&hash=<?php echo $random_hash; ?>"
+                                                                           onclick="return confirm('Are you sure you want to delete this answer?');">Delete</a>
+                                                                        </li><?php } ?>
+
+
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                                <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal"><?php echo $lang['btn-close']; ?></button>
+                                                <a href="<?php echo $act_link; ?>" class="btn btn-md btn-success"
+                                                   style='color:white'><?php echo $lang['btn-go_to_q']; ?></a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <?php } ?>
+                            </div><?php //if(!$current_user->can_see_this('questions.interact', $group)) { echo '<hr style="margin:0">'; } ?>
+
+
+                            <?php
+                            if (isset($admanager1->value) && $admanager1->value != '' && $admanager1->value != '&nbsp;') {
+                                echo '<hr style="margin-bottom:5px">';
+                                echo str_replace('\\', '', $admanager1->value);
+                                echo '<hr style="margin-top:5px">';
+                            } else {
+                                echo '<hr style="margin:0">';
+                            } ?>
+
+
+                            <?php
+                            $t++;
+                        }
+                    } else {
+                        ?>
+                        <h3 style="color:#b0b0b0">
+                            <center><i class="fa fa-edit"></i><br><?php echo $lang['index-question-no_questions']; ?>
+                                <br><br>
+                                <small>
+                                    <a href='<?php echo $url_mapper['questions/create']; ?>'><?php echo $lang['index-question-post']; ?></a>
+                                </small>
+                            </center>
+                        </h3><br><br>
+                        <?php
+                    }
+                    ?>
+                    <?php /*?>
                     $total_count = Question::count_feed_for($current_user->id, $query, " ");
                     $pagination = new Pagination($page, $per_page, $total_count);
                     $questions = Question::get_feed_for($current_user->id, $query, " LIMIT {$per_page} OFFSET {$pagination->offset()} ");
@@ -672,6 +1041,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         </h3><br><br>
                         <?php
                     }
+                    <?php */?>
                 }
 
                 if (isset($pagination) && $pagination->total_pages() > 1) {

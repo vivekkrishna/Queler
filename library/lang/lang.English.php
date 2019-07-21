@@ -73,6 +73,7 @@ $lang['index-user-login'] = 'Login';
 $lang['index-leaderboard-points'] = 'Points';
 $lang['index-question-submit'] = 'Submit';
 $lang['index-question-intro'] = 'This challenge has [VIEWS] views, [ANSWERS] accepts';
+$lang['index-answer-intro'] = 'This acceptance has [VIEWS] views and challenge has [ANSWERS] accepts';
 $lang['index-question-no_questions'] = 'No Challenges found';
 $lang['index-question-post'] = 'Post Your First Challenge';
 $lang['index-question-created'] = 'Posted';
