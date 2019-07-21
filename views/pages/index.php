@@ -309,7 +309,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         $page = 1;
                     }
 
-                    $total_count = FeedRule::getCountOfHomeFeed($current_user->id);
+                    $total_count = 9;#FeedRule::getCountOfHomeFeed($current_user->id);
                     #$total_count = Question::count_feed_for($current_user->id, $query, " ");
                     $pagination = new Pagination($page, $per_page, $total_count);
                     $feeds = FeedRule::getHomePageFeedWithMysqlExtension($current_user->id," LIMIT {$per_page} OFFSET {$pagination->offset()} ");
