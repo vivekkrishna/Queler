@@ -44,6 +44,7 @@ require_once(MODEL_PATH . "Log.php");
 require_once(MODEL_PATH . "Misc.php");
 require_once(MODEL_PATH . "Notif.php");
 require_once(MODEL_PATH . "Question.php");
+require_once(MODEL_PATH . "FeedRule.php");
 require_once(MODEL_PATH . "Report.php");
 require_once(MODEL_PATH . "Tag.php");
 require_once(MODEL_PATH . "User.php");
