@@ -3,6 +3,8 @@
 class FeedRule Extends OneClass
 {
 
+    public static $db_fields = array("user_id", "q_id", "title", "slug", "q_answers", "feed", "content", "likes", "views", "dislikes", "created_at", "updated_at", "content_type", "accepts", "video_location", "audio_location", "file_location", "anonymous", "published");
+
     public static function getAnswerFeed($user_id, $limit)
     {
 
