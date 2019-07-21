@@ -234,10 +234,11 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             <p>
                                 <img src="<?php echo $user_avatar; ?>" class="img-circle"
                                      style="float:<?php echo $lang['direction-left']; ?>;width:20px;margin-<?php echo $lang['direction-right']; ?>:10px">
-                                <a style="font-size: 15px;" href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
+                                <a style="font-size: 20px;" href="<?php echo $url_mapper['users/view'] . $current_user->id; ?>/"><?php echo $current_user->f_name . ' ' . $current_user->l_name; ?></a>
                             </p>
                             <p>
-                                <a style="font-size: 18px; color:blue;" href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
+                                <a onMouseOver="this.style.color='#00F'"
+                                   onMouseOut="this.style.color='#F00'" style="font-size: 25px; font-weight: bolder;" href="<?php echo $url_mapper['questions/create']; ?>/"><?php echo $lang['index-search-title']; ?></a>
                             </p>
                             </div>
                         <br>
