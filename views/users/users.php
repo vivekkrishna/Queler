@@ -23,6 +23,7 @@ if (isset($id)) {
         $quser_avatar = WEB_LINK . "public/" . $img->image_path();
 
         $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
+        $quser_avatar_path = $_SERVER['CloudFrontDomain'] . "/" . $id . "/prof-pic.jpeg";
         if (!file_exists($quser_avatar_path)) {
             $quser_avatar = WEB_LINK . 'public/img/avatar.png';
         }
