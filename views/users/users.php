@@ -20,11 +20,8 @@ if (isset($id)) {
     $title = $user->f_name . ' ' . $user->l_name;
     if ($user->avatar) {
         $img = File::get_specific_id($user->avatar);
-        $quser_avatar = WEB_LINK . "public/" . $img->image_path();
-
-        $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-        $quser_avatar_path = $_SERVER['CloudFrontDomain'] . "/" . $id . "/prof-pic.jpeg";
-        if (!file_exists($quser_avatar_path)) {
+        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $id . "/prof-pic.jpeg";
+        if (!checkRemoteFile($quser_avatar)) {
             $quser_avatar = WEB_LINK . 'public/img/avatar.png';
         }
 

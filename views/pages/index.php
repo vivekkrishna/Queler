@@ -136,10 +136,6 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                     <!-- Leaderboard viewer -->
                     <?php
                 } elseif (isset($_GET['leaderboard']) && $_GET['leaderboard'] == 'true') {
-                    ?>
-
-                    <?php
-
                     $per_page = "20";
                     if (isset($_GET['page']) && is_numeric($_GET['page'])) {
                         $page = $_GET['page'];
@@ -163,14 +159,10 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             foreach ($notif as $u) :
                                 if ($u->avatar) {
                                     $img = File::get_specific_id($u->avatar);
-                                    $quser_avatar = WEB_LINK . "public/" . $img->image_path();
-
-                                    $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-
-                                    if (!file_exists($quser_avatar_path)) {
+                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $u->avatar . "/prof-pic.jpeg";
+                                    if (!file_exists($quser_avatar)) {
                                         $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                     }
-
                                 } else {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }
