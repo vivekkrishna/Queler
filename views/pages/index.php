@@ -160,7 +160,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                 if ($u->avatar) {
                                     $img = File::get_specific_id($u->avatar);
                                     $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $u->avatar . "/prof-pic.jpeg";
-                                    if (!file_exists($quser_avatar)) {
+                                    if (!checkRemoteFile($quser_avatar)) {
                                         $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                     }
                                 } else {
