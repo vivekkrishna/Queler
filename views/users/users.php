@@ -629,6 +629,7 @@ require_once(VIEW_PATH . 'pages/navbar.php');
                                 $img = File::get_specific_id($u->avatar);
                                 $quser_avatar = WEB_LINK . "public/" . $img->image_path();
                                 $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
+                                $quser_avatar_path = $_SERVER['CloudFrontDomain'] . "/" . $f->user_id . "/prof-pic.jpeg";
                                 if (!file_exists($quser_avatar_path)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }
@@ -692,6 +693,7 @@ require_once(VIEW_PATH . 'pages/navbar.php');
                                 $img = File::get_specific_id($u->avatar);
                                 $quser_avatar = WEB_LINK . "public/" . $img->image_path();
                                 $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
+
                                 if (!file_exists($quser_avatar_path)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }
