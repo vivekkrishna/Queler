@@ -264,9 +264,8 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         if ($tag) {
                             if ($tag->avatar) {
                                 $img = File::get_specific_id($tag->avatar);
-                                $quser_avatar = WEB_LINK . "public/" . $img->image_path();
-                                $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                                if (file_exists($quser_avatar_path)) {
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $tag->avatar . "/prof-pic.jpeg";
+                                if (checkRemoteFile($quser_avatar)) {
                                     echo "<img src='{$quser_avatar}' class='img-polaroid' style='float:{$lang['direction-left']};width:80px;margin-{$lang['direction-right']}:20px'>";
                                 } else {
                                     echo "<img src='" . WEB_LINK . "public/img/topic.png' class='img-polaroid' style='float:{$lang['direction-left']};width:80px;margin-{$lang['direction-right']}:20px'>";
@@ -322,17 +321,13 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             $user = User::get_specific_id($q->user_id);
                             if ($user->avatar) {
                                 $img = File::get_specific_id($user->avatar);
-                                $quser_avatar = WEB_LINK . "public/" . $img->image_path();
-                                $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                                $quser_avatar_path = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/prof-pic.jpeg";
-                                echo $quser_avatar_path;
-                                if (!file_exists($quser_avatar_path)) {
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/prof-pic.jpeg";
+                                if (!checkRemoteFile($quser_avatar)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }
                             } else {
                                 $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                             }
-                            $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/prof-pic.jpeg";
                             if ($q->anonymous) {
                                 $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                             }
@@ -487,16 +482,13 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                                     $user = User::get_specific_id($a->user_id);
                                                     if ($user->avatar) {
                                                         $img = File::get_specific_id($user->avatar);
-                                                        $quser_avatar = WEB_LINK . "public/" . $img->image_path();
-                                                        $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                                                        $quser_avatar_path = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/prof-pic.jpeg";
-                                                        if (!file_exists($quser_avatar_path)) {
+                                                        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/prof-pic.jpeg";
+                                                        if (!checkRemoteFile($quser_avatar)) {
                                                             $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                                         }
                                                     } else {
                                                         $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                                     }
-                                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/prof-pic.jpeg";
 
                                                     $upvote_class = 'upvote';
                                                     $downvote_class = 'downvote';

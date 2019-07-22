@@ -128,9 +128,8 @@
                     //global user avatar
                     if ($current_user->avatar) {
                         $img = File::get_specific_id($current_user->avatar);
-                        $user_avatar = WEB_LINK . "public/" . $img->image_path();
-                        $user_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                        if (!file_exists($user_avatar_path)) {
+                        $user_avatar = $_SERVER['CloudFrontDomain'] . "/" . $current_user->avatar . "/prof-pic.jpeg";
+                        if (!checkRemoteFile($user_avatar)) {
                             $user_avatar = WEB_LINK . 'public/img/avatar.png';
                         }
                     } else {
