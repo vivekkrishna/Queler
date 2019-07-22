@@ -332,7 +332,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             } else {
                                 $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                             }
-
+                            $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/prof-pic.jpeg";
                             if ($q->anonymous) {
                                 $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                             }
@@ -496,7 +496,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                                     } else {
                                                         $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                                     }
-
+                                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/prof-pic.jpeg";
 
                                                     $upvote_class = 'upvote';
                                                     $downvote_class = 'downvote';
