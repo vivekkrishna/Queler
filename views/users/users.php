@@ -316,7 +316,7 @@ require_once(VIEW_PATH . 'pages/navbar.php');
                         <b><?php echo $user->f_name . " " . $user->l_name; ?></b><?php if ($user->last_seen >= (time() - 300000)) {
                             echo "&nbsp;<i class='text-success fa fa-circle'></i>";
                         }
-                        echo "&nbsp;<a href='" . WEB_LINK . "/rss/user/" . $user->id . "' target='_blank'><img src='" . WEB_LINK . "/public/img/rss.png' style='width:25px'></a>&nbsp;"; ?>
+                        #echo "&nbsp;<a href='" . WEB_LINK . "/rss/user/" . $user->id . "' target='_blank'><img src='" . WEB_LINK . "/public/img/rss.png' style='width:25px'></a>&nbsp;"; ?>
                         <small style="color:#999">@<?php echo $user->username; ?></small>
                         <?php if ($user->id != $current_user->id) { ?>
                             &nbsp;&nbsp;<a href="#me" class="btn btn-sm btn-default open-chat"

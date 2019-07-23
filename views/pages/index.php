@@ -159,7 +159,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             foreach ($notif as $u) :
                                 if ($u->avatar) {
                                     $img = File::get_specific_id($u->avatar);
-                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $u->avatar . "/prof-pic.jpeg";
+                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $u->id . "/prof-pic.jpeg";
                                     if (!checkRemoteFile($quser_avatar)) {
                                         $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                     }
