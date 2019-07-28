@@ -1,5 +1,9 @@
 <?php
 
+require 'vendor/autoload.php';
+
+use Aws\S3\S3Client;
+
 Class File
 {
 
@@ -234,7 +238,24 @@ Class File
             return false;
         }
 
-        $test = uploadToS3($img, $target_path);
+        #$test = uploadToS3($img, $target_path);
+
+        $s3 = new Aws\S3\S3Client([
+            'region' => 'us-west-2',
+            'version' => 'latest',
+            'credentials' => [
+                'key' => $_SERVER['AWSIAMUSERACCESSKEY'],
+                'secret' => $_SERVER['AWSIAMUSERSECRETKEY'],
+            ]
+        ]);
+
+        $test = $s3->putObject([
+            'Bucket' => 'quelerusers',
+            'Key' => $current_user->id . DS . "prof-pic.jpeg",
+            'SourceFile' => $this->temp_path
+        ]);
+
+        var_dump($test);
         //if (move_uploaded_file($this->temp_path , $target_path)) {
 
         if ($test) {

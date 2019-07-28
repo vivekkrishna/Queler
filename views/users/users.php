@@ -197,7 +197,8 @@ if (isset($_POST['edit_user'])) {
                 $$string = new File();
                 if (!empty($_FILES['upload_files']['name'][$f])) {
                     $$string->attach_file($_FILES['upload_files'], $f);
-                    if ($$string->save($crop)) {
+                    #if ($$string->save($crop)) {
+                    if ($$string->saveProfPic($crop)) {
                         $images[$f] = $$string->id;
                     } else {
                         $upl_msg = $lang['alert-upload_error'];
