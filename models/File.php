@@ -183,6 +183,73 @@ Class File
         }
     }
 
+    public function saveProfPic($crop = false)
+    {
+
+        //check for errors first ..
+        if (!empty($this->errors)) {
+            return false;
+        }
+
+        $target_path = UPLOAD_PATH . DS . 'upl_files' . DS . $this->filename;
+        /*if (file_exists($target_path)) {
+            $this->errors[] = "The file {$this->filename} already exists.";
+            return false;
+        }*/
+
+        if ($this->type == 'image/jpeg') {
+            $img = imagecreatefromjpeg($this->temp_path);
+            if ($crop) {
+                $img = imagecrop($img, $crop);
+            }
+            #$test = imagejpeg($img, $target_path, 100);
+
+        } elseif ($this->type == 'image/png') {
+            $img = imagecreatefrompng($this->temp_path);
+            // integer representation of the color black (rgb: 0,0,0)
+            $background = imagecolorallocate($img, 0, 0, 0);
+            // removing the black from the placeholder
+            imagecolortransparent($img, $background);
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+
+            if ($crop) {
+                $img = imagecrop($img, $crop);
+            }
+            #$test = imagepng($img, $target_path);
+        } elseif ($this->type == 'image/gif') {
+            $img = imagecreatefromgif($this->temp_path);
+            if ($crop) {
+                $img = imagecrop($img, $crop);
+            }
+            #$test = imagegif($img, $target_path);
+        } elseif ($this->type == 'image/bmp') {
+            $img = imagecreatefromwbmp($this->temp_path);
+            if ($crop) {
+                $img = imagecrop($img, $crop);
+            }
+            #$test = imagewbmp($img, $target_path);
+        } else {
+            $this->errors[] = "The file upload failed, Cannot read image details";
+            return false;
+        }
+
+        $test = uploadToS3($img, $target_path);
+        //if (move_uploaded_file($this->temp_path , $target_path)) {
+
+        if ($test) {
+            imagedestroy($img);
+            if ($this->create()) {
+                unset($temp_path);
+                return true;
+            }
+        } else {
+            $this->errors[] = "The file upload failed, possibly due to incorrect permissions on the upload folder.";
+            return false;
+        }
+    }
+
+
     public function size_as_text()
     {
         if ($this->size < 1024) {

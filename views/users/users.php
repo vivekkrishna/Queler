@@ -786,7 +786,6 @@ require_once(VIEW_PATH . 'pages/navbar.php');
 
                                     </div>
 
-
                                 </div>
                                 <hr>
 
