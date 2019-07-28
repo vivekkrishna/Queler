@@ -240,7 +240,7 @@ Class File
         #$test = uploadToS3($img, $target_path);
 
         $s3 = new Aws\S3\S3Client([
-            'region' => 'us-west-2',
+            'region' => 'us-east-1',
             'version' => 'latest',
             'credentials' => [
                 'key' => $_SERVER['AWSIAMUSERACCESSKEY'],
