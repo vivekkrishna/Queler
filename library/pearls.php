@@ -17,6 +17,7 @@ defined('VIEW_PATH') ? null : define('VIEW_PATH', $parent . '/views/');
 defined('CONTROLLER_PATH') ? null : define('CONTROLLER_PATH', $parent . '/controllers/');
 
 defined('UPLOAD_PATH') ? null : define('UPLOAD_PATH', $parent . DS . 'public');
+defined('VENDOR_PATH') ? null : define('VENDOR_PATH', $parent . DS . '/vendor/');
 
 if (filesize(LIBRARY_PATH . 'config.php') == '0') {
     header("Location: install/index.php");
@@ -32,6 +33,7 @@ require_once(LIBRARY_PATH . "Mailer.php");
 require_once(LIBRARY_PATH . "OneClass.php");
 require_once(LIBRARY_PATH . "Pagination.php");
 require_once(LIBRARY_PATH . "PasswordHash.php");
+require_once(VENDOR_PATH . "autoload.php");
 
 require_once(MODEL_PATH . "Award.php");
 require_once(MODEL_PATH . "Answer.php");
