@@ -251,7 +251,7 @@ Class File
 
         $test = $s3->putObject([
             'Bucket' => 'quelerusers',
-            'Key' => $current_user->id . DS . "prof-pic.jpeg",
+            'Key' => $current_user->id . DS . $this->filename,
             'SourceFile' => $this->temp_path
         ]);
 
