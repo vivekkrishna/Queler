@@ -186,7 +186,7 @@ Class File
         }
     }
 
-    public function saveProfPic($crop = false)
+    public function saveProfPic($crop = false, $currUserId)
     {
 
         //check for errors first ..
@@ -250,7 +250,7 @@ Class File
 
         $test = $s3->putObject([
             'Bucket' => 'quelerusers',
-            'Key' => $current_user->id . DS . $this->filename,
+            'Key' => $currUserId . DS . $this->filename,
             'SourceFile' => $this->temp_path
         ]);
 
