@@ -38,9 +38,9 @@ $chat = MiscFunction::get_function("chat");
         )();
     </script>
 
-    <?php /*?><link rel="icon" href="<?php echo UPL_FILES; ?>/img/favicon.ico"><?php */?>
+    <link rel="icon" href="<?php echo UPL_FILES; ?>/img/favicon.ico">
 
-    <title><i class="fa fa-trophy"></i><?php echo $title . " | " . APPNAME; ?></title>
+    <title> <?php echo $title . " | " . APPNAME; ?></title>
 
     <link rel="alternate" href="<?php echo WEB_LINK; ?>rss/" title="<?php echo APPNAME . " | RSS Feed"; ?>"
           type="application/rss+xml"/>
