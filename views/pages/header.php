@@ -38,7 +38,7 @@ $chat = MiscFunction::get_function("chat");
         )();
     </script>
 
-    <link rel="icon" href="<?php echo UPL_FILES; ?>/img/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="<?php echo UPL_FILES; ?>/img/favicon.ico">
 
     <title> <?php echo $title . " | " . APPNAME; ?></title>
 
