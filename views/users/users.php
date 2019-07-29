@@ -20,7 +20,7 @@ if (isset($id)) {
     $title = $user->f_name . ' ' . $user->l_name;
     if ($user->avatar) {
         $img = File::get_specific_id($user->avatar);
-        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $id . "/prof-pic.jpeg";
+        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $id . "/" . $img->imageFileName();
         if (!checkRemoteFile($quser_avatar)) {
             $quser_avatar = WEB_LINK . 'public/img/avatar.png';
         }
@@ -627,7 +627,7 @@ require_once(VIEW_PATH . 'pages/navbar.php');
                                 $img = File::get_specific_id($u->avatar);
                                 $quser_avatar = WEB_LINK . "public/" . $img->image_path();
                                 $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $f->user_id . "/prof-pic.jpeg";
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $f->user_id . "/" . $img->imageFileName();
                                 if (!checkRemoteFile($quser_avatar)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }
@@ -691,7 +691,7 @@ require_once(VIEW_PATH . 'pages/navbar.php');
                                 $img = File::get_specific_id($u->avatar);
                                 #$quser_avatar = WEB_LINK . "public/" . $img->image_path();
                                 #$quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $f->obj_id . "/prof-pic.jpeg";
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $f->obj_id . "/" . $img->imageFileName();
                                 if (!checkRemoteFile($quser_avatar)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }

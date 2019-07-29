@@ -159,7 +159,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             foreach ($notif as $u) :
                                 if ($u->avatar) {
                                     $img = File::get_specific_id($u->avatar);
-                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $u->id . "/prof-pic.jpeg";
+                                    $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $u->id . "/" . $img->imageFileName();
                                     if (!checkRemoteFile($quser_avatar)) {
                                         $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                     }
@@ -256,7 +256,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                         if ($tag) {
                             if ($tag->avatar) {
                                 $img = File::get_specific_id($tag->avatar);
-                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $tag->avatar . "/prof-pic.jpeg";
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $tag->avatar . "/" . $img->imageFileName();
                                 if (checkRemoteFile($quser_avatar)) {
                                     echo "<img src='{$quser_avatar}' class='img-polaroid' style='float:{$lang['direction-left']};width:80px;margin-{$lang['direction-right']}:20px'>";
                                 } else {
@@ -313,7 +313,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             $user = User::get_specific_id($q->user_id);
                             if ($user->avatar) {
                                 $img = File::get_specific_id($user->avatar);
-                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/prof-pic.jpeg";
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/" . $img->imageFileName();
                                 if (!checkRemoteFile($quser_avatar)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }
@@ -474,7 +474,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                                                     $user = User::get_specific_id($a->user_id);
                                                     if ($user->avatar) {
                                                         $img = File::get_specific_id($user->avatar);
-                                                        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/prof-pic.jpeg";
+                                                        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/" . $img->imageFileName();
                                                         if (!checkRemoteFile($quser_avatar)) {
                                                             $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                                         }

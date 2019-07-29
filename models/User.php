@@ -185,6 +185,7 @@ class User Extends OneClass
         return $db->num_rows($result_array) ? true : false;
     }
 
+/*
     public function get_avatar()
     {
         global $db;
@@ -193,6 +194,21 @@ class User Extends OneClass
             $dev_avatar = WEB_LINK . "public/" . $img->image_path();
             $dev_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
             if (!file_exists($dev_avatar_path)) {
+                $dev_avatar = WEB_LINK . 'public/img/avatar.png';
+            }
+        } else {
+            $dev_avatar = WEB_LINK . 'public/img/avatar.png';
+        }
+        return $dev_avatar;
+    }*/
+
+    public function get_avatar()
+    {
+        global $db;
+        if ($this->avatar) {
+            $img = File::get_specific_id($this->avatar);
+            $dev_avatar_path = $_SERVER['CloudFrontDomain'] . "/" . $this->id . "/" . $img->imageFileName();
+            if (!checkRemoteFile($dev_avatar_path)) {
                 $dev_avatar = WEB_LINK . 'public/img/avatar.png';
             }
         } else {

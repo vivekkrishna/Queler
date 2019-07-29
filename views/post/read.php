@@ -28,7 +28,7 @@ if ($q) {
         $img = File::get_specific_id($user->avatar);
         $quser_avatar = WEB_LINK . "public/" . $img->image_path();
         $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/prof-pic.jpeg";
+        $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $q->user_id . "/" . $img->imageFileName();
         if (!checkRemoteFile($quser_avatar)) {
             $quser_avatar = WEB_LINK . 'public/img/avatar.png';
         }
@@ -789,7 +789,7 @@ if ($followed) {
                                 $img = File::get_specific_id($user->avatar);
                                 $quser_avatar = WEB_LINK . "public/" . $img->image_path();
                                 $quser_avatar_path = UPLOAD_PATH . "/" . $img->image_path();
-                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/prof-pic.jpeg";
+                                $quser_avatar = $_SERVER['CloudFrontDomain'] . "/" . $a->user_id . "/" . $img->imageFileName();
                                 if (!checkRemoteFile($quser_avatar)) {
                                     $quser_avatar = WEB_LINK . 'public/img/avatar.png';
                                 }

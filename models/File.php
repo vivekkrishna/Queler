@@ -16,6 +16,7 @@ Class File
 
     private $temp_path;
     protected $upload_dir = "upl_files";
+    private $extension = jpeg;
     public $errors = array();
     protected $upload_errors = array(
 
@@ -119,6 +120,11 @@ Class File
     public function image_path()
     {
         return $this->upload_dir . "/" . $this->filename;
+    }
+
+    public function imageFileName()
+    {
+        return $this->filename;
     }
 
     public function save($crop = false)
@@ -235,8 +241,7 @@ Class File
 
         if($test)
         {
-            $extension = image_type_to_extension($this->type);
-            $testToS3 = uploadToS3($target_path, 'prof-pic.'.$extension, $currUserId, "quelerusers");
+            $testToS3 = uploadToS3($target_path, $this->filename, $currUserId, $_SERVER['QuelerUsersS3BucketName']);
         }
 
         if ($testToS3) {
