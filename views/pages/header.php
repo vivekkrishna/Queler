@@ -26,9 +26,21 @@ $chat = MiscFunction::get_function("chat");
     <meta name="description" content="<?php echo $title . " | " . APPSLOGAN; ?>">
     <meta name="keywords" content="<?php echo APPKEYWORDS; ?>">
     <meta name="author" content="choppak">
-    <link rel="icon" href="<?php echo UPL_FILES; ?>/img/favicon.ico">
 
-    <title><?php echo $title . " | " . APPNAME; ?></title>
+    <!--<script src="https://use.fontawesome.com/48d68862e7.js"></script>-->
+    <script type="text/javascript">
+        (function() {
+            var css = document.createElement('link');
+            css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+            css.rel = 'stylesheet';
+            css.type = 'text/css';
+            document.getElementsByTagName('head')[0].appendChild(css); }
+        )();
+    </script>
+
+    <?php /*?><link rel="icon" href="<?php echo UPL_FILES; ?>/img/favicon.ico"><?php */?>
+
+    <title><i class="fa fa-trophy"></i><?php echo $title . " | " . APPNAME; ?></title>
 
     <link rel="alternate" href="<?php echo WEB_LINK; ?>rss/" title="<?php echo APPNAME . " | RSS Feed"; ?>"
           type="application/rss+xml"/>
@@ -79,6 +91,6 @@ $chat = MiscFunction::get_function("chat");
     </script>
 
 
-    <script src="https://use.fontawesome.com/48d68862e7.js"></script>
+
 
 </head>
