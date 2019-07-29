@@ -540,7 +540,9 @@ if ($followed) {
                         class="fa fa-eye-slash"></i> <?php echo $lang['questions-pending-tag']; ?></p><?php } ?>
 
                 <h1 class="title"><b><?php echo strip_tags($q->title); ?></b>
+                    <?php /*?>
                     <?php echo "&nbsp;<a href='" . WEB_LINK . "/rss/question/" . $q->id . "' target='_blank'><img src='" . WEB_LINK . "/public/img/rss.png' style='width:25px'></a>&nbsp;"; ?>
+                    <?php */?>
                 </h1>
 
                 <p class="footer">

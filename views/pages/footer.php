@@ -5,9 +5,11 @@
 <div class="master-footer pull-<?php echo $lang['direction-right']; ?>">
 
 
+    <?php /*?>
     <a href="https://validator.w3.org/feed/check.cgi?url=<?php echo WEB_LINK; ?>rss/" target="_blank"><img
                 src="https://validator.w3.org/feed/images/valid-rss-rogers.png" alt="[Valid RSS]"
                 title="Validate my RSS feed" style='height:25px'/></a>
+    <?php */?>
 
 </div>
 <?php if (isset($analytics_info) && is_array($analytics_info)) { ?>

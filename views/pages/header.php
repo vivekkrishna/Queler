@@ -42,8 +42,10 @@ $chat = MiscFunction::get_function("chat");
 
     <title> <?php echo $title . " | " . APPNAME; ?></title>
 
+    <?php /*?>
     <link rel="alternate" href="<?php echo WEB_LINK; ?>rss/" title="<?php echo APPNAME . " | RSS Feed"; ?>"
           type="application/rss+xml"/>
+    <?php */?>
 
     <meta property="og:title" content="<?php echo $title . " | " . APPNAME; ?>">
     <meta property="og:description" content="<?php echo $title . " | " . APPSLOGAN; ?>">
