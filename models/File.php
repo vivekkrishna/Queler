@@ -236,7 +236,7 @@ Class File
         if($test)
         {
             $extension = image_type_to_extension($this->type);
-            $testToS3 = uploadToS3($target_path, "prof-pic".$extension, $currUserId, "quelerusers");
+            $testToS3 = uploadToS3($target_path, 'prof-pic.'.$extension, $currUserId, "quelerusers");
         }
 
         if ($testToS3) {
