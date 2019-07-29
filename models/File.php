@@ -195,17 +195,13 @@ Class File
         }
 
         $target_path = UPLOAD_PATH . DS . 'upl_files' . DS . $this->filename;
-        /*if (file_exists($target_path)) {
-            $this->errors[] = "The file {$this->filename} already exists.";
-            return false;
-        }*/
 
         if ($this->type == 'image/jpeg') {
             $img = imagecreatefromjpeg($this->temp_path);
             if ($crop) {
                 $img = imagecrop($img, $crop);
             }
-            #$test = imagejpeg($img, $target_path, 100);
+            $test = imagejpeg($img, $target_path, 100);
 
         } elseif ($this->type == 'image/png') {
             $img = imagecreatefrompng($this->temp_path);
@@ -219,48 +215,35 @@ Class File
             if ($crop) {
                 $img = imagecrop($img, $crop);
             }
-            #$test = imagepng($img, $target_path);
+            $test = imagepng($img, $target_path);
         } elseif ($this->type == 'image/gif') {
             $img = imagecreatefromgif($this->temp_path);
             if ($crop) {
                 $img = imagecrop($img, $crop);
             }
-            #$test = imagegif($img, $target_path);
+            $test = imagegif($img, $target_path);
         } elseif ($this->type == 'image/bmp') {
             $img = imagecreatefromwbmp($this->temp_path);
             if ($crop) {
                 $img = imagecrop($img, $crop);
             }
-            #$test = imagewbmp($img, $target_path);
+            $test = imagewbmp($img, $target_path);
         } else {
             $this->errors[] = "The file upload failed, Cannot read image details";
             return false;
         }
 
-        #$test = uploadToS3($img, $target_path);
+        if($test)
+        {
+            $extension = image_type_to_extension($this->type);
+            $testToS3 = uploadToS3($target_path, "prof-pic".$extension, $currUserId, "quelerusers");
+        }
 
-        $s3 = new Aws\S3\S3Client([
-            'region' => 'us-east-1',
-            'version' => 'latest',
-            'credentials' => [
-                'key' => $_SERVER['AWSIAMUSERACCESSKEY'],
-                'secret' => $_SERVER['AWSIAMUSERSECRETKEY'],
-            ]
-        ]);
-
-        $test = $s3->putObject([
-            'Bucket' => 'quelerusers',
-            'Key' => $currUserId . DS . $this->filename,
-            'SourceFile' => $this->temp_path
-        ]);
-
-        var_dump($test);
-        //if (move_uploaded_file($this->temp_path , $target_path)) {
-
-        if ($test) {
+        if ($testToS3) {
             imagedestroy($img);
             if ($this->create()) {
                 unset($temp_path);
+                unset($target_path);
                 return true;
             }
         } else {

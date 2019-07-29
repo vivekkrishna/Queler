@@ -28,6 +28,7 @@ if (filesize(LIBRARY_PATH . 'config.php') == '0') {
 require_once(LIBRARY_PATH . "config.php");
 require_once(LIBRARY_PATH . "DBManager.php");
 require_once(LIBRARY_PATH . "Functions.php");
+require_once(LIBRARY_PATH . "AWSFunctions.php");
 require_once(LIBRARY_PATH . "SessManager.php");
 require_once(LIBRARY_PATH . "Mailer.php");
 require_once(LIBRARY_PATH . "OneClass.php");
