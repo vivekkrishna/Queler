@@ -389,7 +389,7 @@ require_once(VIEW_PATH . 'pages/header.php'); ?>
                             <p <?php echo $div_link; ?> style='cursor:pointer'>
                                 <?php
                                 $string = '';
-                                if (strpos($q->content, 'embed-responsive') !== false) {
+                                if (strpos($q->content, 'embed-responsive') !== false || strpos($q->content, 'iframe') !== false) {
                                     $string = $q->content;
                                 } else {
                                     $string = strip_tags($q->content);
