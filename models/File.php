@@ -16,7 +16,6 @@ Class File
 
     private $temp_path;
     protected $upload_dir = "upl_files";
-    private $extension = jpeg;
     public $errors = array();
     protected $upload_errors = array(
 
