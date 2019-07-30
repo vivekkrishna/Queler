@@ -39,7 +39,7 @@ $chat = MiscFunction::get_function("chat");
     </script>
 
     <?php $icoFile = $_SERVER['CloudFrontDomain'] . "/quelercontent/favicon.ico"; ?>
-    <link rel="shortcut icon" type="image/png" href=<?php echo $icoFile; ?>>
+    <link rel="shortcut icon" href="<?php echo $icoFile; ?>" >
 
     <title> <?php echo $title . " | " . APPNAME; ?></title>
 
