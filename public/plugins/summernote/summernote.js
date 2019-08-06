@@ -5098,6 +5098,10 @@
             if (match && (match[1] || match[2])) {
                 var link = match[1] ? keyword : defaultScheme + keyword;
                 var node = $('<a />').html(keyword).attr('href', link)[0];
+                var videoNode = this.createVideoNode(link);
+                if (videoNode) {
+                    node = videoNode;
+                }
 
                 this.lastWordRange.insertNode(node);
                 this.lastWordRange = null;
