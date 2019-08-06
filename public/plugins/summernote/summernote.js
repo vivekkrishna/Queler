@@ -5099,10 +5099,13 @@
                 var link = match[1] ? keyword : defaultScheme + keyword;
                 var node = $('<a />').html(keyword).attr('href', link)[0];
                 var videoNode = this.createVideoNode(link);
+                alert("is videoNode : " + videoNode);
                 if (videoNode) {
                     node = videoNode;
+                    // insert video node
+                    context.invoke('editor.insertNode', $node);
                 }
-
+                alert("Actual final node ; " + node);
                 this.lastWordRange.insertNode(node);
                 this.lastWordRange = null;
                 context.invoke('editor.focus');
