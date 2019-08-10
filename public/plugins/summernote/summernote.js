@@ -5064,6 +5064,7 @@
     };
 
     var AutoLink = function (context) {
+        alert("in Autolink");
         var self = this;
         var defaultScheme = 'http://';
         var linkPattern = /^([A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?|mailto:[A-Z0-9._%+-]+@)?(www\.)?(.+)$/i;
@@ -5088,6 +5089,7 @@
         };
 
         this.replace = function () {
+            alert("replace called");
             if (!this.lastWordRange) {
                 return;
             }
@@ -5096,6 +5098,7 @@
             var match = keyword.match(linkPattern);
 
             if (match && (match[1] || match[2])) {
+                alert("match success");
                 var link = match[1] ? keyword : defaultScheme + keyword;
                 var node = $('<a />').html(keyword).attr('href', link)[0];
                 var videoNode = this.createVideoNode(link);
@@ -5719,6 +5722,7 @@
         };
 
         this.addLinkPopoverButtons = function () {
+            alert("in add link pop over buttons");
             context.memo('button.linkDialogShow', function () {
                 return ui.button({
                     contents: ui.icon(options.icons.link),
@@ -6083,6 +6087,8 @@
     };
 
     var LinkPopover = function (context) {
+        alert("in link popover");
+
         var self = this;
         var ui = $.summernote.ui;
 
@@ -6102,6 +6108,7 @@
         };
 
         this.initialize = function () {
+            alert("in link popover initialize function");
             this.$popover = ui.popover({
                 className: 'note-link-popover',
                 callback: function ($node) {
