@@ -6137,6 +6137,7 @@
         };
 
         this.update = function () {
+            alert("in update function");
             // Prevent focusing on editable when invoke('code') is executed
             if (!context.invoke('editor.hasFocus')) {
                 this.hide();
@@ -6148,7 +6149,7 @@
                 var anchor = dom.ancestor(rng.sc, dom.isAnchor);
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
-
+                alert("in update function range collapsed.");
                 var pos = dom.posFromPlaceholder(anchor);
                 this.$popover.css({
                     display: 'block',
