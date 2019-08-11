@@ -6150,6 +6150,12 @@
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
                 alert("in update function range collapsed.");
+                var videoNode = self.createVideoNode(href);
+
+                if (videoNode) {
+                    // insert video node
+                    context.invoke('editor.insertNode', $node);
+                }
                 var pos = dom.posFromPlaceholder(anchor);
                 alert("before display block");
                 this.$popover.css({
@@ -6366,6 +6372,7 @@
         };
 
         this.createVideoNode = function (url) {
+            alert("inside createVideoNode");
             // video url patterns(youtube, instagram, vimeo, dailymotion, youku, mp4, ogg, webm)
             var ytRegExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
             var ytMatch = url.match(ytRegExp);
@@ -6448,6 +6455,7 @@
             $video.addClass('embed-responsive-item');
             $video.appendTo($embed);
 
+            alert("inside createVideoNode embed is " + $embed);
             return $embed[0];
         };
 
