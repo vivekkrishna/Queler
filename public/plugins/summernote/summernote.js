@@ -5733,6 +5733,7 @@
         this.addLinkPopoverButtons = function () {
             alert("in add link pop over buttons");
             context.memo('button.linkDialogShow', function () {
+
                 return ui.button({
                     contents: ui.icon(options.icons.link),
                     tooltip: lang.link.edit,
@@ -6159,13 +6160,14 @@
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
                 alert("in update function range collapsed.");
-                context.invoke('editor.restoreRange');
-                var videoNode = VideoDialog.createVideoNode(href);
+                //context.invoke('editor.restoreRange');
+                /*var videoNode = VideoDialog.createVideoNode(href);
 
                 if (videoNode) {
                     // insert video node
                     context.invoke('editor.insertNode', videoNode);
-                }
+                }*/
+                VideoDialog.show();
                 var pos = dom.posFromPlaceholder(anchor);
                 alert("before display block");
                 /*this.$popover.css({
@@ -6468,6 +6470,7 @@
             $video.appendTo($embed);
 
             alert("inside createVideoNode embed is " + $embed);
+            alert("inside createVideoNode video is " + $video);
             return $embed[0];
         };
 
