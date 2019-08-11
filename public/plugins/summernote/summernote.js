@@ -5995,6 +5995,7 @@
          * @return {Promise}
          */
         this.showLinkDialog = function (linkInfo) {
+            alert("inside showLinkDialog");
             return $.Deferred(function (deferred) {
                 var $linkText = self.$dialog.find('.note-link-text'),
                     $linkUrl = self.$dialog.find('.note-link-url'),
@@ -6002,8 +6003,9 @@
                     $openInNewWindow = self.$dialog.find('input[type=checkbox]');
 
                 ui.onDialogShown(self.$dialog, function () {
+                    alert("before trigger event");
                     context.triggerEvent('dialog.shown');
-
+                    alert("after trigger event");
                     // if no url was given, copy text to url
                     if (!linkInfo.url) {
                         linkInfo.url = linkInfo.text;
@@ -6012,6 +6014,7 @@
                     $linkText.val(linkInfo.text);
 
                     var handleLinkTextUpdate = function () {
+                        alert("in handleLinkTextUpdate");
                         self.toggleLinkBtn($linkBtn, $linkText, $linkUrl);
                         // if linktext was modified by keyup,
                         // stop cloning text from linkUrl
@@ -6019,10 +6022,12 @@
                     };
 
                     $linkText.on('input', handleLinkTextUpdate).on('paste', function () {
+                        alert("in handleLinkTextUpdate paste");
                         setTimeout(handleLinkTextUpdate, 0);
                     });
 
                     var handleLinkUrlUpdate = function () {
+                        alert("in handleLinkUrlUpdate");
                         self.toggleLinkBtn($linkBtn, $linkText, $linkUrl);
                         // display same link on `Text to display` input
                         // when create a new link
@@ -6032,6 +6037,7 @@
                     };
 
                     $linkUrl.on('input', handleLinkUrlUpdate).on('paste', function () {
+                        alert("in handleLinkUrlUpdate paste");
                         setTimeout(handleLinkUrlUpdate, 0);
                     }).val(linkInfo.url).trigger('focus');
 
@@ -6042,6 +6048,7 @@
                     $openInNewWindow.prop('checked', linkInfo.isNewWindow);
 
                     $linkBtn.one('click', function (event) {
+                        alert("in $linkBtn click");
                         event.preventDefault();
 
                         deferred.resolve({
