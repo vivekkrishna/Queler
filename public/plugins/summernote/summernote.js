@@ -1762,11 +1762,13 @@
         this.createInvokeHandler = function (namespace, value) {
             return function (event) {
                 event.preventDefault();
+                alert("in createInvokeHandler with namespace: " + namespace + " value: " + value);
                 self.invoke(namespace, value || $(event.target).closest('[data-value]').data('value'));
             };
         };
 
         this.invoke = function () {
+            alert("inside invoke of Context");
             var namespace = list.head(arguments);
             var args = list.tail(list.from(arguments));
 
@@ -2042,6 +2044,7 @@
         },
 
         showDialog: function ($dialog) {
+            alert("in showDialog");
             $dialog.modal('show');
         },
 
@@ -6475,7 +6478,7 @@
         };
 
         this.show = function () {
-            alert("inside show")
+            alert("inside show");
             var text = context.invoke('editor.getSelectedText');
             context.invoke('editor.saveRange');
             this.showVideoDialog(text).then(function (url) {
