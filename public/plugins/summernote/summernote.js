@@ -4960,11 +4960,13 @@
 
         this.events = {
             'summernote.mousedown': function (we, e) {
+                alert("In handle mousedown event");
                 if (self.update(e.target)) {
                     e.preventDefault();
                 }
             },
             'summernote.keyup summernote.scroll summernote.change summernote.dialog.shown': function () {
+                alert("In handle events");
                 self.update();
             }
         };
@@ -5071,11 +5073,13 @@
 
         this.events = {
             'summernote.keyup': function (we, e) {
+                alert("in Autolink keyup event");
                 if (!e.isDefaultPrevented()) {
                     self.handleKeyup(e);
                 }
             },
             'summernote.keydown': function (we, e) {
+                alert("in Autolink keydown event");
                 self.handleKeydown(e);
             }
         };
@@ -6150,6 +6154,7 @@
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
                 alert("in update function range collapsed.");
+                context.invoke('editor.restoreRange');
                 var videoNode = VideoDialog.createVideoNode(href);
 
                 if (videoNode) {
@@ -6158,13 +6163,14 @@
                 }
                 var pos = dom.posFromPlaceholder(anchor);
                 alert("before display block");
-                this.$popover.css({
+                /*this.$popover.css({
                     display: 'block',
                     left: pos.left,
                     top: pos.top
-                });
+                });*/
                 alert("after display block");
             } else {
+                context.invoke('editor.restoreRange');
                 this.hide();
             }
         };
@@ -6461,20 +6467,23 @@
         };
 
         this.show = function () {
+            alert("inside show")
             var text = context.invoke('editor.getSelectedText');
             context.invoke('editor.saveRange');
             this.showVideoDialog(text).then(function (url) {
                 // [workaround] hide dialog before restore range for IE range focus
                 ui.hideDialog(self.$dialog);
                 context.invoke('editor.restoreRange');
-
+                alert("inside show before createVideoNode");
                 // build node
                 var $node = self.createVideoNode(url);
-
+                alert("inside show before invoking insertNode");
                 if ($node) {
                     // insert video node
                     context.invoke('editor.insertNode', $node);
                 }
+                alert("inside show after invoking insertNode");
+
             }).fail(function () {
                 context.invoke('editor.restoreRange');
             });
@@ -6499,6 +6508,7 @@
                     }).trigger('focus');
 
                     $videoBtn.click(function (event) {
+                        alert("showVideoDialog video btn click");
                         event.preventDefault();
 
                         deferred.resolve($videoUrl.val());
