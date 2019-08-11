@@ -6151,11 +6151,13 @@
                 this.$popover.find('a').attr('href', href).html(href);
                 alert("in update function range collapsed.");
                 var pos = dom.posFromPlaceholder(anchor);
+                alert("before display block");
                 this.$popover.css({
                     display: 'block',
                     left: pos.left,
                     top: pos.top
                 });
+                alert("after display block");
             } else {
                 this.hide();
             }
