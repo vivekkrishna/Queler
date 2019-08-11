@@ -5934,6 +5934,7 @@
     };
 
     var LinkDialog = function (context) {
+        alert("in LinkDialog");
         var self = this;
         var ui = $.summernote.ui;
 
@@ -5942,6 +5943,7 @@
         var lang = options.langInfo;
 
         this.initialize = function () {
+            alert("in LinkDialog initialize method");
             var $container = options.dialogsInBody ? $(document.body) : $editor;
 
             var body = '<div class="form-group">' +
@@ -5957,6 +5959,7 @@
                         '<label>' + '<input type="checkbox" checked> ' + lang.link.openInNewWindow + '</label>' +
                         '</div>' : ''
                 );
+            alert("in LinkDialog body variable");
             var footer = '<button href="#" class="btn btn-primary note-link-btn disabled" disabled>' + lang.link.insert + '</button>';
 
             this.$dialog = ui.dialog({
@@ -6103,6 +6106,7 @@
 
         this.events = {
             'summernote.keyup summernote.mouseup summernote.change summernote.scroll': function () {
+                alert("in link popover events.")
                 self.update();
             },
             'summernote.dialog.shown': function () {
