@@ -4597,9 +4597,11 @@
         };
 
         this.pasteByHook = function () {
+            alert("in paste by hook");
             var node = this.$paste[0].firstChild;
 
             if (dom.isImg(node)) {
+                alert("in paste by hook Img");
                 var dataURI = node.src;
                 var decodedData = atob(dataURI.split(',')[1]);
                 var array = new Uint8Array(decodedData.length);
@@ -4614,11 +4616,13 @@
                 context.invoke('editor.focus');
                 context.invoke('editor.insertImagesOrCallback', [blob]);
             } else {
+                alert("in paste by hook pasteContent");
                 var pasteContent = $('<div />').html(this.$paste.html()).html();
                 context.invoke('editor.restoreRange');
                 context.invoke('editor.focus');
 
                 if (pasteContent) {
+                    alert("in paste by hook pasteContent context invoke " + pasteContent);
                     context.invoke('editor.pasteHTML', pasteContent);
                 }
             }
@@ -4632,6 +4636,7 @@
          * @param {Event} event
          */
         this.pasteByEvent = function (event) {
+            alert("in pasteByEvent");
             var clipboardData = event.originalEvent.clipboardData;
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
