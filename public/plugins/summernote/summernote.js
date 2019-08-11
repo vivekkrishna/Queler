@@ -5106,7 +5106,7 @@
                 if (videoNode) {
                     node = videoNode;
                     // insert video node
-                    context.invoke('editor.insertNode', $node);
+                    context.invoke('editor.insertNode', videoNode);
                 }
                 alert("Actual final node ; " + node);
                 this.lastWordRange.insertNode(node);
@@ -6150,11 +6150,11 @@
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
                 alert("in update function range collapsed.");
-                var videoNode = self.createVideoNode(href);
+                var videoNode = VideoDialog.createVideoNode(href);
 
                 if (videoNode) {
                     // insert video node
-                    context.invoke('editor.insertNode', $node);
+                    context.invoke('editor.insertNode', videoNode);
                 }
                 var pos = dom.posFromPlaceholder(anchor);
                 alert("before display block");
@@ -6334,6 +6334,7 @@
     };
 
     var VideoDialog = function (context) {
+        alert("inside VideoDailog function start")
         var self = this;
         var ui = $.summernote.ui;
 
