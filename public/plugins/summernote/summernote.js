@@ -1670,6 +1670,23 @@
             }
         };
 
+        this.videoembed = function (url) {
+            var isActivated = this.invoke('codeview.isActivated');
+
+            if (html === undefined) {
+                this.invoke('codeview.sync');
+                return isActivated ? this.layoutInfo.codable.val() : this.layoutInfo.editable.html();
+            } else {
+                if (isActivated) {
+                    this.layoutInfo.codable.val(html);
+                } else {
+                    this.layoutInfo.editable.html(html);
+                }
+                $note.val(html);
+                this.triggerEvent('change', html);
+            }
+        };
+
         this.isDisabled = function () {
             return this.layoutInfo.editable.attr('contenteditable') === 'false';
         };
@@ -6164,13 +6181,19 @@
                 this.$popover.find('a').attr('href', href).html(href);
                 alert("in update function range collapsed.");
                 //context.invoke('editor.restoreRange');
+                context.invoke('videoDialog.show');
                 /*var videoNode = VideoDialog.createVideoNode(href);
 
                 if (videoNode) {
                     // insert video node
                     context.invoke('editor.insertNode', videoNode);
-                }*/
-                VideoDialog.show();
+                }
+                return ui.button({
+                    contents: ui.icon(options.icons.video),
+                    tooltip: lang.video.video,
+                    click: context.createInvokeHandler('videoDialog.show')
+                }).render();
+                VideoDialog.show();*/
                 var pos = dom.posFromPlaceholder(anchor);
                 alert("before display block");
                 /*this.$popover.css({
