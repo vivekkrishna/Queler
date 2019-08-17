@@ -709,6 +709,7 @@
          * @param {Function} pred - predicate function
          */
         var ancestor = function (node, pred) {
+            //alert("in acestor");
             while (node) {
                 if (pred(node)) { return node; }
                 if (isEditable(node)) { break; }
@@ -2823,7 +2824,7 @@
             this.pasteHTML = function (markup) {
                 var contentsContainer = $('<div></div>').html(markup)[0];
                 var childNodes = list.from(contentsContainer.childNodes);
-                alert("inside editor pasteHTML method");
+                //alert("inside editor pasteHTML method");
                 var rng = this.wrapBodyInlineWithPara().deleteContents();
 
                 return childNodes.reverse().map(function (childNode) {
@@ -3886,7 +3887,7 @@
          */
         this.createRange = function () {
             this.focus();
-            alert("in create range");
+            //alert("in create range");
             return range.create(editable);
         };
 
@@ -3988,7 +3989,7 @@
         var afterCommand = this.afterCommand = function (isPreventTrigger) {
             history.recordUndo();
             if (!isPreventTrigger) {
-                alert("in afterCommand");
+                //alert("in afterCommand");
                 context.triggerEvent('change', $editable.html());
             }
         };
@@ -4131,7 +4132,7 @@
          */
         this.insertImagesOrCallback = function (files) {
             var callbacks = options.callbacks;
-            alert("in insertImagesOrCallback");
+            //alert("in insertImagesOrCallback");
             // If onImageUpload options setted
             if (callbacks.onImageUpload) {
                 context.triggerEvent('image.upload', files);
@@ -4183,7 +4184,7 @@
          */
         this.pasteHTML = this.wrapCommand(function (markup) {
             var contents = this.createRange().pasteHTML(markup);
-            alert("Another paste HTML method");
+            //alert("Another paste HTML method");
             range.createFromNodeAfter(list.last(contents)).select();
         });
 
@@ -4559,9 +4560,9 @@
 
         this.pasteByHook = function () {
             var node = this.$paste[0].firstChild;
-            alert("paste by hook");
+            //alert("paste by hook");
             if (dom.isImg(node)) {
-                alert("paste by hook image");
+                //alert("paste by hook image");
                 var dataURI = node.src;
                 var decodedData = atob(dataURI.split(',')[1]);
                 var array = new Uint8Array(decodedData.length);
@@ -4576,13 +4577,13 @@
                 context.invoke('editor.focus');
                 context.invoke('editor.insertImagesOrCallback', [blob]);
             } else {
-                alert("paste by hook not image");
+                //alert("paste by hook not image");
                 var pasteContent = $('<div />').html(this.$paste.html()).html();
                 context.invoke('editor.restoreRange');
                 context.invoke('editor.focus');
 
                 if (pasteContent) {
-                    alert("inside paste by hook pasteContent : " + pasteContent);
+                    //alert("inside paste by hook pasteContent : " + pasteContent);
                     context.invoke('editor.pasteHTML', pasteContent);
                 }
             }
@@ -4596,12 +4597,12 @@
          * @param {Event} event
          */
         this.pasteByEvent = function (event) {
-            alert("paste by event");
+            //alert("paste by event");
             var clipboardData = event.originalEvent.clipboardData;
-            alert("clipboard data: " + clipboardData);
+            //alert("clipboard data: " + clipboardData);
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
-                alert("item data: " + item.kind + item.valueAsString);
+                //alert("item data: " + item.kind);
                 if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
                     context.invoke('editor.insertImagesOrCallback', [item.getAsFile()]);
                 }
@@ -6079,7 +6080,7 @@
         };
 
         this.update = function () {
-            alert("in update");
+            //alert("in update");
             // Prevent focusing on editable when invoke('code') is executed
             if (!context.invoke('editor.hasFocus')) {
                 this.hide();
@@ -6087,9 +6088,9 @@
             }
 
             var text = context.invoke('editor.getSelectedText');
-            alert("selected text : " + text);
+            //alert("selected text : " + text);
             context.invoke('editor.saveRange');
-            alert("after save range");
+            //alert("after save range");
             var videoNode = context.invoke('videoDialog.createVideoNode', text);
             if(videoNode)
             {
@@ -6097,9 +6098,9 @@
             } else {
                 context.invoke('editor.restoreRange');
                 var rng = context.invoke('editor.createRange');
-                alert("after create range");
+                //alert("after create range");
                 /*if (rng.isCollapsed() && rng.isOnAnchor()) {
-                    alert("inside collapsed if logic");
+                    //alert("inside collapsed if logic");
                     var anchor = dom.ancestor(rng.sc, dom.isAnchor);
                     var href = $(anchor).attr('href');
                     this.$popover.find('a').attr('href', href).html(href);
