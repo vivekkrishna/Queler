@@ -709,6 +709,7 @@
          * @param {Function} pred - predicate function
          */
         var ancestor = function (node, pred) {
+            alert("in acestor");
             while (node) {
                 if (pred(node)) { return node; }
                 if (isEditable(node)) { break; }
@@ -6096,7 +6097,8 @@
                 context.invoke('editor.restoreRange');
                 var rng = context.invoke('editor.createRange');
                 alert("after create range");
-                if (rng.isCollapsed() && rng.isOnAnchor()) {
+                /*if (rng.isCollapsed() && rng.isOnAnchor()) {
+                    alert("inside collapsed if logic");
                     var anchor = dom.ancestor(rng.sc, dom.isAnchor);
                     var href = $(anchor).attr('href');
                     this.$popover.find('a').attr('href', href).html(href);
@@ -6109,7 +6111,7 @@
                     });
                 } else {
                     this.hide();
-                }
+                }*/
             }
         };
 
