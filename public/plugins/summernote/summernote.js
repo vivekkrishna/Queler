@@ -236,7 +236,7 @@
          * returns item of array
          */
         var find = function (array, pred) {
-            for (var idx = 0, len = array.length; idx < len; idx++) {
+            for (var idx = 0, len = array.length; idx < len; idx ++) {
                 var item = array[idx];
                 if (pred(item)) {
                     return item;
@@ -248,7 +248,7 @@
          * returns true if all of the values in the array pass the predicate truth test.
          */
         var all = function (array, pred) {
-            for (var idx = 0, len = array.length; idx < len; idx++) {
+            for (var idx = 0, len = array.length; idx < len; idx ++) {
                 if (!pred(array[idx])) {
                     return false;
                 }
@@ -310,9 +310,7 @@
          * @param {Array[]}
          */
         var clusterBy = function (array, fn) {
-            if (!array.length) {
-                return [];
-            }
+            if (!array.length) { return []; }
             var aTail = tail(array);
             return aTail.reduce(function (memo, v) {
                 var aLast = last(memo);
@@ -333,10 +331,8 @@
          */
         var compact = function (array) {
             var aResult = [];
-            for (var idx = 0, len = array.length; idx < len; idx++) {
-                if (array[idx]) {
-                    aResult.push(array[idx]);
-                }
+            for (var idx = 0, len = array.length; idx < len; idx ++) {
+                if (array[idx]) { aResult.push(array[idx]); }
             }
             return aResult;
         };
@@ -349,7 +345,7 @@
         var unique = function (array) {
             var results = [];
 
-            for (var idx = 0, len = array.length; idx < len; idx++) {
+            for (var idx = 0, len = array.length; idx < len; idx ++) {
                 if (!contains(results, array[idx])) {
                     results.push(array[idx]);
                 }
@@ -364,9 +360,7 @@
          */
         var next = function (array, item) {
             var idx = indexOf(array, item);
-            if (idx === -1) {
-                return null;
-            }
+            if (idx === -1) { return null; }
 
             return array[idx + 1];
         };
@@ -377,19 +371,15 @@
          */
         var prev = function (array, item) {
             var idx = indexOf(array, item);
-            if (idx === -1) {
-                return null;
-            }
+            if (idx === -1) { return null; }
 
             return array[idx - 1];
         };
 
-        return {
-            head: head, last: last, initial: initial, tail: tail,
+        return { head: head, last: last, initial: initial, tail: tail,
             prev: prev, next: next, find: find, contains: contains,
             all: all, sum: sum, from: from, isEmpty: isEmpty,
-            clusterBy: clusterBy, compact: compact, unique: unique
-        };
+            clusterBy: clusterBy, compact: compact, unique: unique };
     })();
 
     var isSupportAmd = typeof define === 'function' && define.amd;
@@ -720,12 +710,8 @@
          */
         var ancestor = function (node, pred) {
             while (node) {
-                if (pred(node)) {
-                    return node;
-                }
-                if (isEditable(node)) {
-                    break;
-                }
+                if (pred(node)) { return node; }
+                if (isEditable(node)) { break; }
 
                 node = node.parentNode;
             }
@@ -742,15 +728,9 @@
             node = node.parentNode;
 
             while (node) {
-                if (nodeLength(node) !== 1) {
-                    break;
-                }
-                if (pred(node)) {
-                    return node;
-                }
-                if (isEditable(node)) {
-                    break;
-                }
+                if (nodeLength(node) !== 1) { break; }
+                if (pred(node)) { return node; }
+                if (isEditable(node)) { break; }
 
                 node = node.parentNode;
             }
@@ -794,9 +774,7 @@
         var commonAncestor = function (nodeA, nodeB) {
             var ancestors = listAncestor(nodeA);
             for (var n = nodeB; n; n = n.parentNode) {
-                if ($.inArray(n, ancestors) > -1) {
-                    return n;
-                }
+                if ($.inArray(n, ancestors) > -1) { return n; }
             }
             return null; // difference document area
         };
@@ -812,9 +790,7 @@
 
             var nodes = [];
             while (node) {
-                if (pred(node)) {
-                    break;
-                }
+                if (pred(node)) { break; }
                 nodes.push(node);
                 node = node.previousSibling;
             }
@@ -832,9 +808,7 @@
 
             var nodes = [];
             while (node) {
-                if (pred(node)) {
-                    break;
-                }
+                if (pred(node)) { break; }
                 nodes.push(node);
                 node = node.nextSibling;
             }
@@ -1353,12 +1327,8 @@
          * @param {Boolean} isRemoveChild
          */
         var remove = function (node, isRemoveChild) {
-            if (!node || !node.parentNode) {
-                return;
-            }
-            if (node.removeNode) {
-                return node.removeNode(isRemoveChild);
-            }
+            if (!node || !node.parentNode) { return; }
+            if (node.removeNode) { return node.removeNode(isRemoveChild); }
 
             var parent = node.parentNode;
             if (!isRemoveChild) {
@@ -1670,23 +1640,6 @@
             }
         };
 
-        this.videoembed = function (url) {
-            var isActivated = this.invoke('codeview.isActivated');
-
-            if (html === undefined) {
-                this.invoke('codeview.sync');
-                return isActivated ? this.layoutInfo.codable.val() : this.layoutInfo.editable.html();
-            } else {
-                if (isActivated) {
-                    this.layoutInfo.codable.val(html);
-                } else {
-                    this.layoutInfo.editable.html(html);
-                }
-                $note.val(html);
-                this.triggerEvent('change', html);
-            }
-        };
-
         this.isDisabled = function () {
             return this.layoutInfo.editable.attr('contenteditable') === 'false';
         };
@@ -1779,13 +1732,11 @@
         this.createInvokeHandler = function (namespace, value) {
             return function (event) {
                 event.preventDefault();
-                alert("in createInvokeHandler with namespace: " + namespace + " value: " + value);
                 self.invoke(namespace, value || $(event.target).closest('[data-value]').data('value'));
             };
         };
 
         this.invoke = function () {
-            alert("inside invoke of Context");
             var namespace = list.head(arguments);
             var args = list.tail(list.from(arguments));
 
@@ -2061,7 +2012,6 @@
         },
 
         showDialog: function ($dialog) {
-            alert("in showDialog");
             $dialog.modal('show');
         },
 
@@ -2418,7 +2368,7 @@
                 if (dom.isText(container)) {
                     var prevTextNodes = dom.listPrev(container, func.not(dom.isText));
                     var prevContainer = list.last(prevTextNodes).previousSibling;
-                    node = prevContainer || container.parentNode;
+                    node =  prevContainer || container.parentNode;
                     offset += list.sum(list.tail(prevTextNodes), dom.nodeLength);
                     isCollapseToStart = !prevContainer;
                 } else {
@@ -3435,8 +3385,7 @@
                     'font-superscript': document.queryCommandState('superscript') ? 'superscript' : 'normal',
                     'font-strikethrough': document.queryCommandState('strikethrough') ? 'strikethrough' : 'normal'
                 });
-            } catch (e) {
-            }
+            } catch (e) {}
 
             // list-style-type to list-style(unordered, ordered)
             if (!rng.isOnList()) {
@@ -3493,7 +3442,7 @@
             var self = this;
             var rng = range.create(editable).wrapBodyInlineWithPara();
 
-            var paras = rng.nodes(dom.isPara, {includeAncestor: true});
+            var paras = rng.nodes(dom.isPara, { includeAncestor: true });
             var clustereds = list.clusterBy(paras, func.peq2('parentNode'));
 
             $.each(clustereds, function (idx, paras) {
@@ -3519,7 +3468,7 @@
             var self = this;
             var rng = range.create(editable).wrapBodyInlineWithPara();
 
-            var paras = rng.nodes(dom.isPara, {includeAncestor: true});
+            var paras = rng.nodes(dom.isPara, { includeAncestor: true });
             var clustereds = list.clusterBy(paras, func.peq2('parentNode'));
 
             $.each(clustereds, function (idx, paras) {
@@ -3547,7 +3496,7 @@
         this.toggleList = function (listName, editable) {
             var rng = range.create(editable).wrapBodyInlineWithPara();
 
-            var paras = rng.nodes(dom.isPara, {includeAncestor: true});
+            var paras = rng.nodes(dom.isPara, { includeAncestor: true });
             var bookmark = rng.paraBookmark(paras);
             var clustereds = list.clusterBy(paras, func.peq2('parentNode'));
 
@@ -3905,15 +3854,9 @@
             var keyMap = options.keyMap[agent.isMac ? 'mac' : 'pc'];
             var keys = [];
 
-            if (event.metaKey) {
-                keys.push('CMD');
-            }
-            if (event.ctrlKey && !event.altKey) {
-                keys.push('CTRL');
-            }
-            if (event.shiftKey) {
-                keys.push('SHIFT');
-            }
+            if (event.metaKey) { keys.push('CMD'); }
+            if (event.ctrlKey && !event.altKey) { keys.push('CTRL'); }
+            if (event.shiftKey) { keys.push('SHIFT'); }
 
             var keyName = key.nameFromCode[event.keyCode];
             if (keyName) {
@@ -4055,7 +3998,7 @@
             'formatBlock', 'removeFormat',
             'backColor', 'foreColor', 'fontName'];
 
-        for (var idx = 0, len = commands.length; idx < len; idx++) {
+        for (var idx = 0, len = commands.length; idx < len; idx ++) {
             this[commands[idx]] = (function (sCmd) {
                 return function (value) {
                     beforeCommand();
@@ -4258,15 +4201,14 @@
         context.memo('help.formatPara', lang.help.formatPara);
 
         /* jshint ignore:start */
-        for (var idx = 1; idx <= 6; idx++) {
+        for (var idx = 1; idx <= 6; idx ++) {
             this['formatH' + idx] = function (idx) {
                 return function () {
                     this.formatBlock('H' + idx);
                 };
             }(idx);
-            context.memo('help.formatH' + idx, lang.help['formatH' + idx]);
-        }
-        ;
+            context.memo('help.formatH'+idx, lang.help['formatH' + idx]);
+        };
         /* jshint ignore:end */
 
         /**
@@ -4457,12 +4399,8 @@
             var foreColor = colorInfo.foreColor;
             var backColor = colorInfo.backColor;
 
-            if (foreColor) {
-                document.execCommand('foreColor', false, foreColor);
-            }
-            if (backColor) {
-                document.execCommand('backColor', false, backColor);
-            }
+            if (foreColor) { document.execCommand('foreColor', false, foreColor); }
+            if (backColor) { document.execCommand('backColor', false, backColor); }
         });
 
         /**
@@ -4617,11 +4555,9 @@
         };
 
         this.pasteByHook = function () {
-            alert("in paste by hook");
             var node = this.$paste[0].firstChild;
 
             if (dom.isImg(node)) {
-                alert("in paste by hook Img");
                 var dataURI = node.src;
                 var decodedData = atob(dataURI.split(',')[1]);
                 var array = new Uint8Array(decodedData.length);
@@ -4629,20 +4565,18 @@
                     array[i] = decodedData.charCodeAt(i);
                 }
 
-                var blob = new Blob([array], {type: 'image/png'});
+                var blob = new Blob([array], { type: 'image/png' });
                 blob.name = 'clipboard.png';
 
                 context.invoke('editor.restoreRange');
                 context.invoke('editor.focus');
                 context.invoke('editor.insertImagesOrCallback', [blob]);
             } else {
-                alert("in paste by hook pasteContent");
                 var pasteContent = $('<div />').html(this.$paste.html()).html();
                 context.invoke('editor.restoreRange');
                 context.invoke('editor.focus');
 
                 if (pasteContent) {
-                    alert("in paste by hook pasteContent context invoke " + pasteContent);
                     context.invoke('editor.pasteHTML', pasteContent);
                 }
             }
@@ -4656,7 +4590,6 @@
          * @param {Event} event
          */
         this.pasteByEvent = function (event) {
-            alert("in pasteByEvent");
             var clipboardData = event.originalEvent.clipboardData;
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
@@ -4985,13 +4918,11 @@
 
         this.events = {
             'summernote.mousedown': function (we, e) {
-                alert("In handle mousedown event");
                 if (self.update(e.target)) {
                     e.preventDefault();
                 }
             },
             'summernote.keyup summernote.scroll summernote.change summernote.dialog.shown': function () {
-                alert("In handle events");
                 self.update();
             }
         };
@@ -5091,20 +5022,17 @@
     };
 
     var AutoLink = function (context) {
-        alert("in Autolink");
         var self = this;
         var defaultScheme = 'http://';
         var linkPattern = /^([A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?|mailto:[A-Z0-9._%+-]+@)?(www\.)?(.+)$/i;
 
         this.events = {
             'summernote.keyup': function (we, e) {
-                alert("in Autolink keyup event");
                 if (!e.isDefaultPrevented()) {
                     self.handleKeyup(e);
                 }
             },
             'summernote.keydown': function (we, e) {
-                alert("in Autolink keydown event");
                 self.handleKeydown(e);
             }
         };
@@ -5118,7 +5046,6 @@
         };
 
         this.replace = function () {
-            alert("replace called");
             if (!this.lastWordRange) {
                 return;
             }
@@ -5127,17 +5054,9 @@
             var match = keyword.match(linkPattern);
 
             if (match && (match[1] || match[2])) {
-                alert("match success");
                 var link = match[1] ? keyword : defaultScheme + keyword;
                 var node = $('<a />').html(keyword).attr('href', link)[0];
-                var videoNode = this.createVideoNode(link);
-                alert("is videoNode : " + videoNode);
-                if (videoNode) {
-                    node = videoNode;
-                    // insert video node
-                    context.invoke('editor.insertNode', videoNode);
-                }
-                alert("Actual final node ; " + node);
+
                 this.lastWordRange.insertNode(node);
                 this.lastWordRange = null;
                 context.invoke('editor.focus');
@@ -5276,7 +5195,7 @@
                         template: function (item) {
 
                             if (typeof item === 'string') {
-                                item = {tag: item, title: (lang.style.hasOwnProperty(item) ? lang.style[item] : item)};
+                                item = { tag: item, title: (lang.style.hasOwnProperty(item) ? lang.style[item] : item) };
                             }
 
                             var tag = item.tag;
@@ -5284,7 +5203,7 @@
                             var style = item.style ? ' style="' + item.style + '" ' : '';
                             var className = item.className ? ' class="' + item.className + '"' : '';
 
-                            return '<' + tag + style + className + '>' + title + '</' + tag + '>';
+                            return '<' + tag + style + className + '>' + title + '</' + tag +  '>';
                         },
                         click: context.createInvokeHandler('editor.formatBlock')
                     })
@@ -5475,7 +5394,7 @@
                 }).render();
             });
 
-            context.memo('button.ul', function () {
+            context.memo('button.ul',  function () {
                 return ui.button({
                     contents: ui.icon(options.icons.unorderedlist),
                     tooltip: lang.lists.unordered + representShortcut('insertUnorderedList'),
@@ -5487,7 +5406,7 @@
                 return ui.button({
                     contents: ui.icon(options.icons.orderedlist),
                     tooltip: lang.lists.ordered + representShortcut('insertOrderedList'),
-                    click: context.createInvokeHandler('editor.insertOrderedList')
+                    click:  context.createInvokeHandler('editor.insertOrderedList')
                 }).render();
             });
 
@@ -5701,7 +5620,7 @@
                 }).render();
             });
             context.memo('button.imageSize50', function () {
-                return ui.button({
+                return  ui.button({
                     contents: '<span class="note-fontsize-10">50%</span>',
                     tooltip: lang.image.resizeHalf,
                     click: context.createInvokeHandler('editor.resize', '0.5')
@@ -5751,9 +5670,7 @@
         };
 
         this.addLinkPopoverButtons = function () {
-            alert("in add link pop over buttons");
             context.memo('button.linkDialogShow', function () {
-
                 return ui.button({
                     contents: ui.icon(options.icons.link),
                     tooltip: lang.link.edit,
@@ -5883,15 +5800,15 @@
                 r: Math.ceil(posOffset.y / PX_PER_EM) || 1
             };
 
-            $highlighted.css({width: dim.c + 'em', height: dim.r + 'em'});
+            $highlighted.css({ width: dim.c + 'em', height: dim.r + 'em' });
             $catcher.data('value', dim.c + 'x' + dim.r);
 
             if (3 < dim.c && dim.c < options.insertTableMaxSize.col) {
-                $unhighlighted.css({width: dim.c + 1 + 'em'});
+                $unhighlighted.css({ width: dim.c + 1 + 'em'});
             }
 
             if (3 < dim.r && dim.r < options.insertTableMaxSize.row) {
-                $unhighlighted.css({height: dim.r + 1 + 'em'});
+                $unhighlighted.css({ height: dim.r + 1 + 'em'});
             }
 
             $dimensionDisplay.html(dim.c + ' x ' + dim.r);
@@ -5964,7 +5881,6 @@
     };
 
     var LinkDialog = function (context) {
-        alert("in LinkDialog");
         var self = this;
         var ui = $.summernote.ui;
 
@@ -5973,7 +5889,6 @@
         var lang = options.langInfo;
 
         this.initialize = function () {
-            alert("in LinkDialog initialize method");
             var $container = options.dialogsInBody ? $(document.body) : $editor;
 
             var body = '<div class="form-group">' +
@@ -5989,7 +5904,6 @@
                         '<label>' + '<input type="checkbox" checked> ' + lang.link.openInNewWindow + '</label>' +
                         '</div>' : ''
                 );
-            alert("in LinkDialog body variable");
             var footer = '<button href="#" class="btn btn-primary note-link-btn disabled" disabled>' + lang.link.insert + '</button>';
 
             this.$dialog = ui.dialog({
@@ -6028,7 +5942,6 @@
          * @return {Promise}
          */
         this.showLinkDialog = function (linkInfo) {
-            alert("inside showLinkDialog");
             return $.Deferred(function (deferred) {
                 var $linkText = self.$dialog.find('.note-link-text'),
                     $linkUrl = self.$dialog.find('.note-link-url'),
@@ -6036,9 +5949,8 @@
                     $openInNewWindow = self.$dialog.find('input[type=checkbox]');
 
                 ui.onDialogShown(self.$dialog, function () {
-                    alert("before trigger event");
                     context.triggerEvent('dialog.shown');
-                    alert("after trigger event");
+
                     // if no url was given, copy text to url
                     if (!linkInfo.url) {
                         linkInfo.url = linkInfo.text;
@@ -6047,7 +5959,6 @@
                     $linkText.val(linkInfo.text);
 
                     var handleLinkTextUpdate = function () {
-                        alert("in handleLinkTextUpdate");
                         self.toggleLinkBtn($linkBtn, $linkText, $linkUrl);
                         // if linktext was modified by keyup,
                         // stop cloning text from linkUrl
@@ -6055,12 +5966,10 @@
                     };
 
                     $linkText.on('input', handleLinkTextUpdate).on('paste', function () {
-                        alert("in handleLinkTextUpdate paste");
                         setTimeout(handleLinkTextUpdate, 0);
                     });
 
                     var handleLinkUrlUpdate = function () {
-                        alert("in handleLinkUrlUpdate");
                         self.toggleLinkBtn($linkBtn, $linkText, $linkUrl);
                         // display same link on `Text to display` input
                         // when create a new link
@@ -6070,7 +5979,6 @@
                     };
 
                     $linkUrl.on('input', handleLinkUrlUpdate).on('paste', function () {
-                        alert("in handleLinkUrlUpdate paste");
                         setTimeout(handleLinkUrlUpdate, 0);
                     }).val(linkInfo.url).trigger('focus');
 
@@ -6081,7 +5989,6 @@
                     $openInNewWindow.prop('checked', linkInfo.isNewWindow);
 
                     $linkBtn.one('click', function (event) {
-                        alert("in $linkBtn click");
                         event.preventDefault();
 
                         deferred.resolve({
@@ -6127,8 +6034,6 @@
     };
 
     var LinkPopover = function (context) {
-        alert("in link popover");
-
         var self = this;
         var ui = $.summernote.ui;
 
@@ -6136,7 +6041,6 @@
 
         this.events = {
             'summernote.keyup summernote.mouseup summernote.change summernote.scroll': function () {
-                alert("in link popover events.")
                 self.update();
             },
             'summernote.dialog.shown': function () {
@@ -6149,7 +6053,6 @@
         };
 
         this.initialize = function () {
-            alert("in link popover initialize function");
             this.$popover = ui.popover({
                 className: 'note-link-popover',
                 callback: function ($node) {
@@ -6167,7 +6070,6 @@
         };
 
         this.update = function () {
-            alert("in update function");
             // Prevent focusing on editable when invoke('code') is executed
             if (!context.invoke('editor.hasFocus')) {
                 this.hide();
@@ -6179,31 +6081,14 @@
                 var anchor = dom.ancestor(rng.sc, dom.isAnchor);
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
-                alert("in update function range collapsed.");
-                //context.invoke('editor.restoreRange');
                 context.invoke('videoDialog.show');
-                /*var videoNode = VideoDialog.createVideoNode(href);
-
-                if (videoNode) {
-                    // insert video node
-                    context.invoke('editor.insertNode', videoNode);
-                }
-                return ui.button({
-                    contents: ui.icon(options.icons.video),
-                    tooltip: lang.video.video,
-                    click: context.createInvokeHandler('videoDialog.show')
-                }).render();
-                VideoDialog.show();*/
                 var pos = dom.posFromPlaceholder(anchor);
-                alert("before display block");
-                /*this.$popover.css({
+                this.$popover.css({
                     display: 'block',
                     left: pos.left,
                     top: pos.top
-                });*/
-                alert("after display block");
+                });
             } else {
-                context.invoke('editor.restoreRange');
                 this.hide();
             }
         };
@@ -6373,7 +6258,6 @@
     };
 
     var VideoDialog = function (context) {
-        alert("inside VideoDailog function start")
         var self = this;
         var ui = $.summernote.ui;
 
@@ -6412,7 +6296,6 @@
         };
 
         this.createVideoNode = function (url) {
-            alert("inside createVideoNode");
             // video url patterns(youtube, instagram, vimeo, dailymotion, youku, mp4, ogg, webm)
             var ytRegExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
             var ytMatch = url.match(ytRegExp);
@@ -6495,29 +6378,24 @@
             $video.addClass('embed-responsive-item');
             $video.appendTo($embed);
 
-            alert("inside createVideoNode embed is " + $embed);
-            alert("inside createVideoNode video is " + $video);
             return $embed[0];
         };
 
         this.show = function () {
-            alert("inside show");
             var text = context.invoke('editor.getSelectedText');
             context.invoke('editor.saveRange');
             this.showVideoDialog(text).then(function (url) {
                 // [workaround] hide dialog before restore range for IE range focus
                 ui.hideDialog(self.$dialog);
                 context.invoke('editor.restoreRange');
-                alert("inside show before createVideoNode");
+
                 // build node
                 var $node = self.createVideoNode(url);
-                alert("inside show before invoking insertNode");
+
                 if ($node) {
                     // insert video node
                     context.invoke('editor.insertNode', $node);
                 }
-                alert("inside show after invoking insertNode");
-
             }).fail(function () {
                 context.invoke('editor.restoreRange');
             });
@@ -6542,7 +6420,6 @@
                     }).trigger('focus');
 
                     $videoBtn.click(function (event) {
-                        alert("showVideoDialog video btn click");
                         event.preventDefault();
 
                         deferred.resolve($videoUrl.val());
