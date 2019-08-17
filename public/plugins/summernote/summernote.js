@@ -4599,8 +4599,10 @@
         this.pasteByEvent = function (event) {
             alert("paste by event");
             var clipboardData = event.originalEvent.clipboardData;
+            alert("clipboard data: " + clipboardData);
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
+                alert("item data: " + item);
                 if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
                     context.invoke('editor.insertImagesOrCallback', [item.getAsFile()]);
                 }
