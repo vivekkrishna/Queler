@@ -3886,6 +3886,7 @@
          */
         this.createRange = function () {
             this.focus();
+            alert("in create range");
             return range.create(editable);
         };
 
@@ -3987,6 +3988,7 @@
         var afterCommand = this.afterCommand = function (isPreventTrigger) {
             history.recordUndo();
             if (!isPreventTrigger) {
+                alert("in afterCommand");
                 context.triggerEvent('change', $editable.html());
             }
         };
@@ -6083,12 +6085,14 @@
             }
 
             var rng = context.invoke('editor.createRange');
+            alert("after create range");
             if (rng.isCollapsed() && rng.isOnAnchor()) {
                 var anchor = dom.ancestor(rng.sc, dom.isAnchor);
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
                 var text = context.invoke('editor.getSelectedText');
                 context.invoke('editor.saveRange');
+                alert("after save range");
                 var videoNode = context.invoke('videoDialog.createVideoNode', text);
                 if(videoNode)
                 {
