@@ -6084,30 +6084,32 @@
                 return;
             }
 
-            var rng = context.invoke('editor.createRange');
-            alert("after create range");
-            if (rng.isCollapsed() && rng.isOnAnchor()) {
-                var anchor = dom.ancestor(rng.sc, dom.isAnchor);
-                var href = $(anchor).attr('href');
-                this.$popover.find('a').attr('href', href).html(href);
-                var text = context.invoke('editor.getSelectedText');
-                context.invoke('editor.saveRange');
-                alert("after save range");
-                var videoNode = context.invoke('videoDialog.createVideoNode', text);
-                if(videoNode)
-                {
-                    context.invoke('editor.insertNode', videoNode);
-                } else {
-                    context.invoke('editor.restoreRange');
-                }
-                var pos = dom.posFromPlaceholder(anchor);
-                this.$popover.css({
-                    display: 'block',
-                    left: pos.left,
-                    top: pos.top
-                });
+            var text = context.invoke('editor.getSelectedText');
+            alert("selected text : " + text);
+            context.invoke('editor.saveRange');
+            alert("after save range");
+            var videoNode = context.invoke('videoDialog.createVideoNode', text);
+            if(videoNode)
+            {
+                context.invoke('editor.insertNode', videoNode);
             } else {
-                this.hide();
+                context.invoke('editor.restoreRange');
+                var rng = context.invoke('editor.createRange');
+                alert("after create range");
+                if (rng.isCollapsed() && rng.isOnAnchor()) {
+                    var anchor = dom.ancestor(rng.sc, dom.isAnchor);
+                    var href = $(anchor).attr('href');
+                    this.$popover.find('a').attr('href', href).html(href);
+
+                    var pos = dom.posFromPlaceholder(anchor);
+                    this.$popover.css({
+                        display: 'block',
+                        left: pos.left,
+                        top: pos.top
+                    });
+                } else {
+                    this.hide();
+                }
             }
         };
 
