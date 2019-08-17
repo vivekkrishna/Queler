@@ -709,7 +709,6 @@
          * @param {Function} pred - predicate function
          */
         var ancestor = function (node, pred) {
-            alert("in acestor");
             while (node) {
                 if (pred(node)) { return node; }
                 if (isEditable(node)) { break; }
@@ -4602,7 +4601,7 @@
             alert("clipboard data: " + clipboardData);
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
-                alert("item data: " + item);
+                alert("item data: " + item.kind + item.valueAsString);
                 if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
                     context.invoke('editor.insertImagesOrCallback', [item.getAsFile()]);
                 }
