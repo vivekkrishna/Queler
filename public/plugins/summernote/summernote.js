@@ -1659,6 +1659,7 @@
         };
 
         this.triggerEvent = function () {
+            alert("inside trigger event");
             var namespace = list.head(arguments);
             var args = list.tail(list.from(arguments));
 
@@ -4129,7 +4130,7 @@
          */
         this.insertImagesOrCallback = function (files) {
             var callbacks = options.callbacks;
-
+            alert("in insertImagesOrCallback");
             // If onImageUpload options setted
             if (callbacks.onImageUpload) {
                 context.triggerEvent('image.upload', files);
@@ -4559,6 +4560,7 @@
             var node = this.$paste[0].firstChild;
             alert("paste by hook");
             if (dom.isImg(node)) {
+                alert("paste by hook image");
                 var dataURI = node.src;
                 var decodedData = atob(dataURI.split(',')[1]);
                 var array = new Uint8Array(decodedData.length);
@@ -4593,7 +4595,7 @@
          * @param {Event} event
          */
         this.pasteByEvent = function (event) {
-            alert("paste by hook");
+            alert("paste by event");
             var clipboardData = event.originalEvent.clipboardData;
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
