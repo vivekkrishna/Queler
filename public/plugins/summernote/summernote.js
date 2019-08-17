@@ -2823,7 +2823,7 @@
             this.pasteHTML = function (markup) {
                 var contentsContainer = $('<div></div>').html(markup)[0];
                 var childNodes = list.from(contentsContainer.childNodes);
-
+                alert("inside editor pasteHTML method");
                 var rng = this.wrapBodyInlineWithPara().deleteContents();
 
                 return childNodes.reverse().map(function (childNode) {
@@ -4181,6 +4181,7 @@
          */
         this.pasteHTML = this.wrapCommand(function (markup) {
             var contents = this.createRange().pasteHTML(markup);
+            alert("Another paste HTML method");
             range.createFromNodeAfter(list.last(contents)).select();
         });
 
@@ -4556,7 +4557,7 @@
 
         this.pasteByHook = function () {
             var node = this.$paste[0].firstChild;
-
+            alert("paste by hook");
             if (dom.isImg(node)) {
                 var dataURI = node.src;
                 var decodedData = atob(dataURI.split(',')[1]);
@@ -4572,11 +4573,13 @@
                 context.invoke('editor.focus');
                 context.invoke('editor.insertImagesOrCallback', [blob]);
             } else {
+                alert("paste by hook not image");
                 var pasteContent = $('<div />').html(this.$paste.html()).html();
                 context.invoke('editor.restoreRange');
                 context.invoke('editor.focus');
 
                 if (pasteContent) {
+                    alert("inside paste by hook pasteContent : " + pasteContent);
                     context.invoke('editor.pasteHTML', pasteContent);
                 }
             }
@@ -4590,6 +4593,7 @@
          * @param {Event} event
          */
         this.pasteByEvent = function (event) {
+            alert("paste by hook");
             var clipboardData = event.originalEvent.clipboardData;
             if (clipboardData && clipboardData.items && clipboardData.items.length) {
                 var item = list.head(clipboardData.items);
