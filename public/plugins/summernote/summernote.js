@@ -6081,7 +6081,15 @@
                 var anchor = dom.ancestor(rng.sc, dom.isAnchor);
                 var href = $(anchor).attr('href');
                 this.$popover.find('a').attr('href', href).html(href);
-                context.invoke('videoDialog.show');
+                var text = context.invoke('editor.getSelectedText');
+                context.invoke('editor.saveRange');
+                var videoNode = context.invoke('videoDialog.createVideoNode', text);
+                if(videoNode)
+                {
+                    context.invoke('editor.insertNode', videoNode);
+                } else {
+                    context.invoke('editor.restoreRange');
+                }
                 var pos = dom.posFromPlaceholder(anchor);
                 this.$popover.css({
                     display: 'block',
