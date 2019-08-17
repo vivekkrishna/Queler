@@ -1659,7 +1659,6 @@
         };
 
         this.triggerEvent = function () {
-            alert("inside trigger event");
             var namespace = list.head(arguments);
             var args = list.tail(list.from(arguments));
 
@@ -6076,6 +6075,7 @@
         };
 
         this.update = function () {
+            alert("in update");
             // Prevent focusing on editable when invoke('code') is executed
             if (!context.invoke('editor.hasFocus')) {
                 this.hide();
